@@ -1,22 +1,20 @@
-import {Box} from "@mui/material";
-import styles from "./Loader.module.css"
-
+import {Box, CircularProgress} from "@mui/material";
+import styles from './Loader.module.css'
 interface LoaderProps {
-    readonly width?: number | string;
-    readonly height?: number | string;
+    width?: number;
+    height?: number;
 }
 
-export const Loader = (props: LoaderProps) => {
-    const { width, height } = props;
+export const Loader = ({ width, height }: LoaderProps) => {
     return (
         <Box
             className={styles.loaderContainer}
             sx={{
                 width: width || '100%',
-                height: height || '100%',
+                height: height || '100vh',
             }}
         >
-            <Box className={styles.loader} />
+            <CircularProgress size={100}/>
         </Box>
     );
 };

@@ -5,16 +5,16 @@ import ThemeProvider from '@/app/providers/ThemeProvider';
 import App from '@/app/App.tsx';
 import {ErrorBoundary} from "@/app/providers/ErrorBoundary";
 import {BrowserRouter} from "react-router";
-import {AuthProvider} from "@/app/providers/AuthProvider";
+import {StoreProvider} from "@/app/providers/StoreProvider/StoreProvider.tsx";
 
 createRoot(document.getElementById('root')!).render(
     <StrictMode>
         <BrowserRouter>
             <ThemeProvider>
                 <ErrorBoundary>
-                    <AuthProvider>
+                    <StoreProvider>
                         <App />
-                    </AuthProvider>
+                    </StoreProvider>
                 </ErrorBoundary>
             </ThemeProvider>
         </BrowserRouter>

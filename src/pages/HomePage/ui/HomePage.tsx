@@ -1,41 +1,21 @@
-import {useEffect} from "react";
-import {useAuth} from "@/shared/lib/hooks/useAuth.ts";
-import api from "@/shared/api/api.ts";
+import {Header} from "@/widgets/Header";
+import {ClientList} from "@/widgets/ClientList";
+import {Button, Stack} from "@mui/material";
+import {CreateClientModal} from "@/widgets/CreateClientModal";
+import {useState} from "react";
 
 const HomePage = () => {
-    const {token} = useAuth()
-
-    useEffect(() => {
-        if (token) getData()
-    }, [token])
-    /*const getData = async () => {
-        try {
-            const res = await axios.get('http://localhost:3000/api/clients', {
-                headers: {
-                    Authorization: `Bearer ${token}`
-                }
-            })
-
-            console.log(res.data)
-
-        } catch (err) {
-            console.log(err)
-        }
-    }*/
-
-    const getData = async () => {
-        try {
-            const res = await api.get("/clients");
-            console.log(res.data);
-        } catch (err) {
-            console.error("Ошибка получения данных:", err);
-        }
-    };
-
-
+    const [open, setOpen] = useState(false);
     return (
         <div>
-            homepage
+            <Header/>
+            <Stack spacing={3} alignItems="center">
+                <Button variant="contained" onClick={() => setOpen(true)}>
+                    + Добавить клиента
+                </Button>
+                <CreateClientModal open={open} onClose={() => setOpen(false)} />
+            </Stack>
+            <ClientList/>
         </div>
     );
 };

@@ -1,14 +1,16 @@
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { TextField, Button, Box, Typography, Container } from '@mui/material';
-import axios from "axios";
 import {useNavigate} from "react-router";
 import {LoginFormInputs, loginSchema} from "@/features/auth/model/LoginFormSchema.ts";
-import {useAuth} from "@/shared/lib/hooks/useAuth.ts";
+import {login} from "@/features/auth/model/authSlice.ts";
+import {useAppDispatch, useAppSelector} from "@/shared/lib/hooks/reduxHooks.ts";
+
 
 const LoginForm = () => {
     const navigate = useNavigate()
-    const { login } = useAuth();
+    const dispatch = useAppDispatch();
+    const { status, error } = useAppSelector((state) => state.auth);
 
     const {
         register,
@@ -19,25 +21,9 @@ const LoginForm = () => {
     });
 
     const onSubmit = async (data: LoginFormInputs) => {
-        try {
-            console.log("Login Data:", data);
-
-            const res = await axios.post("http://localhost:3000/api/auth/login", data);
-
-            if (res.status === 200) {
-                const { accessToken } = res.data;
-
-                if (accessToken) {
-                    login(accessToken);
-                    navigate("/");
-                } else {
-                    console.error("Токен отсутствует в ответе сервера");
-                }
-            } else {
-                console.error("Ошибка авторизации:", res.status, res.statusText);
-            }
-        } catch (error) {
-            console.error("Ошибка входа:", error);
+        const resultAction = await dispatch(login(data))
+        if (login.fulfilled.match(resultAction)) {
+            navigate("/");
         }
     };
 
@@ -73,8 +59,9 @@ const LoginForm = () => {
                         helperText={errors.password?.message}
                     />
                     <Button type="submit" variant="contained" color="primary" fullWidth sx={{ mt: 2 }}>
-                        Войти
+                        {status === "loading" ? "Загрузка..." : "Войти"}
                     </Button>
+                    {error && <p>{error}</p>}
                 </form>
             </Box>
         </Container>
