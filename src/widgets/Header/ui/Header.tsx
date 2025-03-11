@@ -2,30 +2,31 @@ import AppBar from "@mui/material/AppBar";
 import Toolbar from "@mui/material/Toolbar";
 import Typography from "@mui/material/Typography";
 import Button from "@mui/material/Button";
-import IconButton from "@mui/material/IconButton";
-import { Box } from "@mui/material";
-import {FC} from "react";
-import {useAppSelector} from "@/shared/lib/hooks/reduxHooks.ts";
+import { Box, Container } from "@mui/material";
+import { useNavigate } from "react-router";
+import {LogoutButton} from "@/widgets/LogoutButton";
 
-export const Header: FC = () => {
-    const {isAuth} = useAppSelector(state => state.auth)
+export const Header = () => {
+    const navigate = useNavigate();
 
     return (
-        <AppBar position="static">
-            <Toolbar>
-                <IconButton edge="start" color="inherit" aria-label="menu" sx={{ mr: 2 }}>
-                </IconButton>
-                {isAuth ? <Button color="inherit" >Выйти</Button> : <Button color="inherit">Войти</Button>}
-                <Typography variant="h6" sx={{ flexGrow: 1 }}>
-                    My App
-                </Typography>
-                <Box>
-                    <Button color="inherit">Главная</Button>
-                    <Button color="inherit">О нас</Button>
-                    <Button color="inherit">Контакты</Button>
-                </Box>
-            </Toolbar>
+        <AppBar position="static" sx={{ backgroundColor: "#1976d2" }}>
+            <Container>
+                <Toolbar>
+                    <Typography variant="h6" sx={{ flexGrow: 1, fontWeight: "bold" }}>
+                        Clients CRM
+                    </Typography>
+                    <Box>
+                        <Button color="inherit" onClick={() => navigate("/")} sx={{ fontSize: "1rem", mx: 1 }}>
+                            Клиенты
+                        </Button>
+                        <Button color="inherit" onClick={() => navigate("/statistics")} sx={{ fontSize: "1rem", mx: 1 }}>
+                            Статистика
+                        </Button>
+                    </Box>
+                    <LogoutButton/>
+                </Toolbar>
+            </Container>
         </AppBar>
     );
 };
-

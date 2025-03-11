@@ -45,6 +45,31 @@ export const addClient = createAsyncThunk(
     }
 )
 
+export const updateClient = createAsyncThunk(
+    'clients/updateClient',
+    async ({id, clientData}: { id: number; clientData: IAddClient }, {rejectWithValue }) => {
+        try {
+            const res = await api.put(`/clients/${id}`, clientData)
+            return res.data
+        } catch {
+            return rejectWithValue('Ошибка при создании клиента')
+        }
+    }
+)
+
+export const DeleteClientById = createAsyncThunk(
+    'clients/DeleteClientById',
+    async ({id}: {id: number}, {rejectWithValue }) => {
+        try {
+            const res = await api.delete(`/clients/${id}`)
+            return res.data
+        } catch {
+            return rejectWithValue('Ошибка удаления клиента')
+        }
+    }
+)
+
+
 const clientSlice = createSlice({
     name: 'clients',
     initialState,
@@ -77,6 +102,26 @@ const clientSlice = createSlice({
             .addCase(addClient.fulfilled, (state, action) => {
                 state.clients.push(action.payload);
                 state.status ='succeeded';
+            })
+           .addCase(addClient.rejected, (state, action) => {
+                state.status = 'failed';
+                state.error = action.payload as string;
+            })
+           .addCase(updateClient.fulfilled, (state, action) => {
+                state.clients = state.clients.map(client => client.id === action.payload.id? action.payload : client)
+                state.status ='succeeded';
+            })
+           .addCase(updateClient.rejected, (state, action) => {
+                state.status = 'failed';
+                state.error = action.payload as string;
+            })
+           .addCase(DeleteClientById.fulfilled, (state, action) => {
+                state.clients = state.clients.filter(client => client.id!== action.payload.id)
+                state.status ='succeeded';
+            })
+           .addCase(DeleteClientById.rejected, (state, action) => {
+                state.status = 'failed';
+                state.error = action.payload as string;
             })
     }
 })

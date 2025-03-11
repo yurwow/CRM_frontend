@@ -6,6 +6,7 @@ import {PrivateRouter} from "@/app/providers/PrivateRouter";
 import {HomePage} from "@/pages/HomePage";
 import {ClientPage} from "@/pages/ClientPage";
 import {StatisticsPage} from "@/pages/StatisticsPage";
+import {NotFoundPage} from "@/pages/404Page";
 
 
 export const RouterProvider = () => {
@@ -18,7 +19,7 @@ export const RouterProvider = () => {
                    <Route path='/clients/:id' element={<ClientPage/>} />
                    <Route path='/statistics' element={<StatisticsPage/>} />
                </Route>
-               <Route path="*" element={<h1>404 Not Found</h1>} />
+               <Route path="*" element={<NotFoundPage/>} />
            </Routes>
         </Suspense>
     )

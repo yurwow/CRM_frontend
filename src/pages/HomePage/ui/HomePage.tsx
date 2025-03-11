@@ -1,21 +1,18 @@
-import {Header} from "@/widgets/Header";
-import {ClientList} from "@/widgets/ClientList";
-import {Button, Stack} from "@mui/material";
-import {CreateClientModal} from "@/widgets/CreateClientModal";
-import {useState} from "react";
+import { Header } from "@/widgets/Header";
+import { ClientList } from "@/widgets/ClientList";
+import { CreateClientModal } from "@/widgets/CreateClientModal";
+import { useState } from "react";
+import {AddClientButton} from "@/widgets/AddClientButton";
 
 const HomePage = () => {
     const [open, setOpen] = useState(false);
+
     return (
         <div>
-            <Header/>
-            <Stack spacing={3} alignItems="center">
-                <Button variant="contained" onClick={() => setOpen(true)}>
-                    + Добавить клиента
-                </Button>
-                <CreateClientModal open={open} onClose={() => setOpen(false)} />
-            </Stack>
-            <ClientList/>
+            <Header />
+            <ClientList />
+            <AddClientButton onClick={() => setOpen(true)}/>
+            <CreateClientModal open={open} onClose={() => setOpen(false)} />
         </div>
     );
 };

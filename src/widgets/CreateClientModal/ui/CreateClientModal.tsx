@@ -87,7 +87,7 @@ export const CreateClientModal = ({ open, onClose }: IProps) => {
                     />
                 </Stack>
             </DialogContent>
-            <DialogActions>
+            <DialogActions sx={{mr: 2, mb: 1}}>
                 <Button onClick={onClose} color="error">Отмена</Button>
                 <Button onClick={handleSubmit(onSubmit)} variant="contained">Создать</Button>
             </DialogActions>

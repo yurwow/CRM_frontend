@@ -1,13 +1,14 @@
-import { Box } from "@mui/material";
 import {InteractionsList} from "@/widgets/Interactions";
 import {ClientInf} from "@/widgets/ClientInf";
+import {Header} from "@/widgets/Header";
 
 const ClientPage = () => {
     return (
-        <Box sx={{ maxWidth: 600, margin: "0 auto", padding: 3 }}>
+        <>
+            <Header/>
             <ClientInf/>
             <InteractionsList/>
-        </Box>
+        </>
     );
 };
 
