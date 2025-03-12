@@ -1,1 +1,1 @@
-export {InteractionsList} from './ui/InteractionsList.tsx'
+export { InteractionsList } from './ui/InteractionsList.tsx';

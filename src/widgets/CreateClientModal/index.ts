@@ -1,1 +1,1 @@
-export {CreateClientModal} from './ui/CreateClientModal.tsx'
+export { CreateClientModal } from './ui/CreateClientModal.tsx';

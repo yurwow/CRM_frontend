@@ -1,32 +1,31 @@
-import {useEffect, useState} from "react";
-import {Card, CardContent} from "@mui/material";
-import { BarChart, Bar, PieChart, Pie, Cell, Tooltip, XAxis, YAxis, ResponsiveContainer } from "recharts";
-import axios from "axios";
-import {Header} from "@/widgets/Header";
+import { useEffect, useState } from 'react';
+import { Card, CardContent } from '@mui/material';
+import { BarChart, Bar, PieChart, Pie, Cell, Tooltip, XAxis, YAxis, ResponsiveContainer } from 'recharts';
+import axios from 'axios';
+import { Header } from '@/widgets/Header';
 
-
-const COLORS = ["#0088FE", "#00C49F", "#FFBB28", "#FF8042"];
+const COLORS = ['#0088FE', '#00C49F', '#FFBB28', '#FF8042'];
 
 const StatisticsPage = () => {
     const [stats, setStats] = useState({
         totalClients: 0,
         interactionsCount: 0,
         interactionsByType: [],
-        clientsByStatus: []
+        clientsByStatus: [],
     });
 
     useEffect(() => {
         async function fetchStats() {
-            const response = await axios.get("http://localhost:3000/api/statistics");
+            const response = await axios.get('http://localhost:3000/api/statistics');
             setStats(response.data);
-            console.log(response.data)
+            console.log(response.data);
         }
         fetchStats();
     }, []);
 
     return (
         <>
-            <Header/>
+            <Header />
             <div className="p-4 grid grid-cols-1 md:grid-cols-2 gap-4">
                 <Card>
                     <CardContent>
@@ -78,11 +77,12 @@ const StatisticsPage = () => {
                         <p className="text-3xl font-semibold">{stats.totalClients}</p>
                     </CardContent>
                 </Card>
-
                 <Card>
                     <CardContent>
                         <h2 className="text-xl font-bold">Среднее количество взаимодействий на клиента</h2>
-                        <p className="text-3xl font-semibold">{stats.interactionsCount ? stats.interactionsCount.toFixed(1) : 0}</p>
+                        <p className="text-3xl font-semibold">
+                            {stats.interactionsCount ? stats.interactionsCount.toFixed(1) : 0}
+                        </p>
                     </CardContent>
                 </Card>
             </div>

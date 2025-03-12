@@ -1,1 +1,1 @@
-export {ClientPageAsync as ClientPage} from './ui/ClientPage.async.tsx'
+export { ClientPageAsync as ClientPage } from './ui/ClientPage.async.tsx';

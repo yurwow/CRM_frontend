@@ -1,3 +1,3 @@
-import {lazy} from "react";
+import { lazy } from 'react';
 
-export const ClientPageAsync = lazy(() => import('./ClientPage.tsx'))
+export const ClientPageAsync = lazy(() => import('./ClientPage.tsx'));

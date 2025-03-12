@@ -1,1 +1,1 @@
-export {AddClientButton} from './ui/AddClientButton.tsx'
+export { AddClientButton } from './ui/AddClientButton.tsx';

@@ -1,1 +1,1 @@
-export {DeleteConfirmationModal} from './ui/DeleteConfirmationModal.tsx'
+export { DeleteConfirmationModal } from './ui/DeleteConfirmationModal.tsx';

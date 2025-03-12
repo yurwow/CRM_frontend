@@ -1,1 +1,1 @@
-export {StatisticsPageAsync as StatisticsPage} from './ui/StatisticsPage.async.tsx'
+export { StatisticsPageAsync as StatisticsPage } from './ui/StatisticsPage.async.tsx';

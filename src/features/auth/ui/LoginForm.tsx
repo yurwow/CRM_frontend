@@ -1,14 +1,13 @@
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
-import { TextField, Button, Box, Typography, Container } from '@mui/material';
-import {useNavigate} from "react-router";
-import {LoginFormInputs, loginSchema} from "@/features/auth/model/LoginFormSchema.ts";
-import {login} from "@/features/auth/model/authSlice.ts";
-import {useAppDispatch, useAppSelector} from "@/shared/lib/hooks/reduxHooks.ts";
-
+import { TextField, Button, Box, Typography, Container, Alert } from '@mui/material';
+import { useNavigate } from 'react-router';
+import { LoginFormInputs, loginSchema } from '@/features/auth/model/LoginFormSchema.ts';
+import { login } from '@/features/auth/model/authSlice.ts';
+import { useAppDispatch, useAppSelector } from '@/shared/lib/hooks/reduxHooks.ts';
 
 const LoginForm = () => {
-    const navigate = useNavigate()
+    const navigate = useNavigate();
     const dispatch = useAppDispatch();
     const { status, error } = useAppSelector((state) => state.auth);
 
@@ -21,9 +20,9 @@ const LoginForm = () => {
     });
 
     const onSubmit = async (data: LoginFormInputs) => {
-        const resultAction = await dispatch(login(data))
+        const resultAction = await dispatch(login(data));
         if (login.fulfilled.match(resultAction)) {
-            navigate("/");
+            navigate('/');
         }
     };
 
@@ -59,9 +58,13 @@ const LoginForm = () => {
                         helperText={errors.password?.message}
                     />
                     <Button type="submit" variant="contained" color="primary" fullWidth sx={{ mt: 2 }}>
-                        {status === "loading" ? "Загрузка..." : "Войти"}
+                        {status === 'loading' ? 'Загрузка...' : 'Войти'}
                     </Button>
-                    {error && <p>{error}</p>}
+                    {error && (
+                        <Alert severity="error" sx={{ mt: 2 }}>
+                            {error}
+                        </Alert>
+                    )}
                 </form>
             </Box>
         </Container>

@@ -1,4 +1,4 @@
-import { Dialog, DialogActions, DialogContent, DialogTitle, Button } from "@mui/material";
+import { Dialog, DialogActions, DialogContent, DialogTitle, Button } from '@mui/material';
 
 interface DeleteConfirmationModalProps {
     open: boolean;
@@ -10,9 +10,7 @@ export const DeleteConfirmationModal = ({ open, onClose, onConfirm }: DeleteConf
     return (
         <Dialog open={open} onClose={onClose}>
             <DialogTitle>Подтверждение удаления</DialogTitle>
-            <DialogContent>
-                Вы уверены, что хотите удалить клиента? Это действие нельзя будет отменить.
-            </DialogContent>
+            <DialogContent>Вы уверены, что хотите удалить клиента? Это действие нельзя будет отменить.</DialogContent>
             <DialogActions>
                 <Button onClick={onClose} color="primary">
                     Отмена

@@ -1,1 +1,1 @@
-export {ClientInf} from './ui/ClientInf.tsx'
+export { ClientInf } from './ui/ClientInf.tsx';

@@ -1,14 +1,16 @@
-import {InteractionsList} from "@/widgets/Interactions";
-import {ClientInf} from "@/widgets/ClientInf";
-import {Header} from "@/widgets/Header";
+import { InteractionsList } from '@/widgets/Interactions';
+import { ClientInf } from '@/widgets/ClientInf';
+import { Header } from '@/widgets/Header';
+import { ToastContainer } from 'react-toastify';
 
 const ClientPage = () => {
     return (
-        <>
-            <Header/>
-            <ClientInf/>
-            <InteractionsList/>
-        </>
+        <div>
+            <Header />
+            <ClientInf />
+            <InteractionsList />
+            <ToastContainer position="top-right" autoClose={3000} />
+        </div>
     );
 };
 

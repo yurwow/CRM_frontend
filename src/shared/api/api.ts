@@ -1,8 +1,8 @@
-import axios from "axios";
-import {logout, refresh} from "@/features/auth/model/authSlice.ts";
-import {AppStore} from "@/app/store.ts";
+import axios from 'axios';
+import { logout, refresh } from '@/features/auth/model/authSlice.ts';
+import { AppStore } from '@/app/store.ts';
 
-const API_URL = "http://localhost:3000/api";
+const API_URL = 'http://localhost:3000/api';
 
 const api = axios.create({
     baseURL: API_URL,
@@ -10,7 +10,7 @@ const api = axios.create({
 
 export const setupInterceptors = (store: AppStore) => {
     api.interceptors.request.use((config) => {
-        const token = localStorage.getItem("accessToken");
+        const token = localStorage.getItem('accessToken');
         if (token) {
             config.headers.Authorization = `Bearer ${token}`;
         }
@@ -36,7 +36,7 @@ export const setupInterceptors = (store: AppStore) => {
                 }
             }
             return Promise.reject(error);
-        }
+        },
     );
 };
 

@@ -1,18 +1,15 @@
-import { Header } from "@/widgets/Header";
-import { ClientList } from "@/widgets/ClientList";
-import { CreateClientModal } from "@/widgets/CreateClientModal";
-import { useState } from "react";
-import {AddClientButton} from "@/widgets/AddClientButton";
+import { Header } from '@/widgets/Header';
+import { ClientList } from '@/widgets/ClientList';
+import { CreateClientModal } from '@/widgets/CreateClientModal';
+import { ToastContainer } from 'react-toastify';
 
 const HomePage = () => {
-    const [open, setOpen] = useState(false);
-
     return (
         <div>
             <Header />
             <ClientList />
-            <AddClientButton onClick={() => setOpen(true)}/>
-            <CreateClientModal open={open} onClose={() => setOpen(false)} />
+            <CreateClientModal />
+            <ToastContainer position="top-right" autoClose={3000} />
         </div>
     );
 };

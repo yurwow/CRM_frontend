@@ -1,8 +1,8 @@
-import { useState } from "react";
-import { Fab, Box, Tooltip } from "@mui/material";
-import AddIcon from "@mui/icons-material/Add";
-import DeleteIcon from "@mui/icons-material/Delete";
-import PhoneIcon from "@mui/icons-material/Phone"; // Пример для добавления взаимодействия
+import { useState } from 'react';
+import { Fab, Box, Tooltip } from '@mui/material';
+import AddIcon from '@mui/icons-material/Add';
+import DeleteIcon from '@mui/icons-material/Delete';
+import PhoneIcon from '@mui/icons-material/Phone';
 
 interface FabButtonProps {
     onAddClick: () => void;
@@ -13,13 +13,13 @@ export const FabButton = ({ onAddClick, onDeleteClick }: FabButtonProps) => {
     const [open, setOpen] = useState(false);
 
     return (
-        <Box sx={{ position: "fixed", bottom: 20, right: 20 }}>
+        <Box sx={{ position: 'fixed', bottom: 20, right: 20 }}>
             <Fab
                 color="primary"
                 sx={{
                     boxShadow: 4,
-                    transition: "0.3s ease-in-out",
-                    "&:hover": { transform: "scale(1.1)" },
+                    transition: '0.3s ease-in-out',
+                    '&:hover': { transform: 'scale(1.1)' },
                     zIndex: 1,
                 }}
                 onClick={() => setOpen(!open)}
@@ -32,12 +32,12 @@ export const FabButton = ({ onAddClick, onDeleteClick }: FabButtonProps) => {
                     <Fab
                         color="secondary"
                         sx={{
-                            position: "absolute",
+                            position: 'absolute',
                             bottom: 70,
                             right: 0,
                             boxShadow: 4,
-                            transition: "0.3s ease-in-out",
-                            "&:hover": { transform: "scale(1.1)" },
+                            transition: '0.3s ease-in-out',
+                            '&:hover': { transform: 'scale(1.1)' },
                             zIndex: 0,
                         }}
                         onClick={onAddClick}
@@ -52,12 +52,12 @@ export const FabButton = ({ onAddClick, onDeleteClick }: FabButtonProps) => {
                     <Fab
                         color="error"
                         sx={{
-                            position: "absolute",
+                            position: 'absolute',
                             bottom: 130,
                             right: 0,
                             boxShadow: 4,
-                            transition: "0.3s ease-in-out",
-                            "&:hover": { transform: "scale(1.1)" },
+                            transition: '0.3s ease-in-out',
+                            '&:hover': { transform: 'scale(1.1)' },
                             zIndex: 0,
                         }}
                         onClick={onDeleteClick}

@@ -1,5 +1,5 @@
-import {Box, CircularProgress} from "@mui/material";
-import styles from './Loader.module.css'
+import { Box, CircularProgress } from '@mui/material';
+import styles from './Loader.module.css';
 interface LoaderProps {
     width?: number;
     height?: number;
@@ -14,7 +14,7 @@ export const Loader = ({ width, height }: LoaderProps) => {
                 height: height || '100vh',
             }}
         >
-            <CircularProgress size={100}/>
+            <CircularProgress size={100} />
         </Box>
     );
 };

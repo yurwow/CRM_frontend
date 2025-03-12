@@ -1,1 +1,1 @@
-export {ProfileModal} from './ui/ProfileModal.tsx'
+export { ProfileModal } from './ui/ProfileModal.tsx';

@@ -1,1 +1,1 @@
-export {ClientList} from './ui/ClientList.tsx'
+export { ClientList } from './ui/ClientList.tsx';
