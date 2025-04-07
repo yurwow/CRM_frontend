@@ -19,10 +19,10 @@ export const StatsTable = ({ stats }: StatsTableProps) => {
                     </Typography>
                 </Box>
                 <Box sx={{ p: 2, height: 350 }}>
-                    {stats.clientsByMonth?.length > 0 || stats.interactionsByMonth?.length > 0 ? (
+                    {stats?.clientsByMonth?.length > 0 || stats?.interactionsByMonth?.length > 0 ? (
                         <ResponsiveContainer width="100%" height="100%">
                             <AreaChart
-                                data={mergeMonthlyData(stats.clientsByMonth, stats.interactionsByMonth)}
+                                data={mergeMonthlyData(stats?.clientsByMonth, stats?.interactionsByMonth)}
                                 margin={{ top: 10, right: 30, left: 0, bottom: 0 }}
                             >
                                 <CartesianGrid strokeDasharray="3 3" />

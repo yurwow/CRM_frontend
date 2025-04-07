@@ -1,10 +1,9 @@
 import { useState } from 'react';
 import { Button, Grid, MenuItem, TextField, Dialog, DialogContent, DialogTitle } from '@mui/material';
 import { useForm } from 'react-hook-form';
-import { useAppDispatch } from '@/shared/lib/hooks/reduxHooks.ts';
-import { createUser } from '@/features/users/model/userSlice.ts';
 import { toast } from 'react-toastify';
 import { AddClientButton } from '@/widgets/AddClientButton';
+import {useCreateUserMutation} from '@/features/users/model/userApi.ts'
 
 const roles = ['manager', 'admin'];
 
@@ -26,7 +25,8 @@ export const CreateUser = () => {
         watch,
     } = useForm<IFormInput>();
     const [loading, setLoading] = useState(false);
-    const dispatch = useAppDispatch();
+    const [createUser] = useCreateUserMutation();
+
 
     const handleClickOpen = () => {
         setOpen(true);
@@ -43,7 +43,7 @@ export const CreateUser = () => {
         const { confirmPassword, ...userData } = data;
 
         try {
-            await dispatch(createUser(userData)).unwrap();
+            await createUser(userData).unwrap();
             toast.success('Пользователь успешно создан');
             reset();
             handleClose();
@@ -66,9 +66,9 @@ export const CreateUser = () => {
                 <DialogContent>
                     <form onSubmit={handleSubmit(onSubmit)}>
                         <Grid container spacing={2}>
-                            <Grid item xs={12}>
+                            <Grid item sx={{mt: 1}} xs={12}>
                                 <TextField
-                                    label="Полное имя"
+                                    label="ФИО"
                                     {...register('full_name', { required: 'Поле обязательно для заполнения' })}
                                     fullWidth
                                     error={!!errors.full_name}

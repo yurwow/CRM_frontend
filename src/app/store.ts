@@ -5,6 +5,9 @@ import { setupInterceptors } from '@/shared/api/api.ts';
 import interactionsSlice from '@/features/interactions/model/interactionsSlice.ts';
 import userSlice from '@/features/users/model/userSlice.ts';
 import statisticsSlice from '@/features/statistics/model/statisticsSlice.ts';
+import { userApi } from '@/features/users/model/userApi.ts';
+import { statisticsApi } from '@/features/statistics/model/statisticsApi.ts';
+import {authApi} from '@/features/auth/model/authApi.ts';
 
 export const store = configureStore({
     reducer: {
@@ -13,7 +16,15 @@ export const store = configureStore({
         interactions: interactionsSlice,
         users: userSlice,
         statistics: statisticsSlice,
+        [userApi.reducerPath]: userApi.reducer,
+        [statisticsApi.reducerPath]: statisticsApi.reducer,
+        [authApi.reducerPath]: authApi.reducer,
     },
+    middleware: (getDefaultMiddleware) =>
+        getDefaultMiddleware()
+            .concat(userApi.middleware)
+            .concat(statisticsApi.middleware)
+            .concat(authApi.middleware),
 });
 
 setupInterceptors(store);

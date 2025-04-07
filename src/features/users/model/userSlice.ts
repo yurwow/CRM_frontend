@@ -1,22 +1,15 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import axios from 'axios';
-import { IState, User } from '@/entities/User/types.ts';
+import { IState } from '@/entities/User/types.ts';
 
-interface ErrorResponse {
-    message: string;
-}
-
-export const getUsers = createAsyncThunk<User[], void, { rejectValue: ErrorResponse }>(
+export const getUsers = createAsyncThunk(
     'user/getUsers',
-    async (_, { rejectWithValue }): Promise<User[]> => {
+    async (_, { rejectWithValue }) => {
         try {
             const response = await axios.get('http://localhost:3000/api/users');
             return response.data;
-        } catch (error) {
-            if (axios.isAxiosError(error) && error.response) {
-                return rejectWithValue({ message: error.response.data?.message || 'Ошибка загрузки данных о пользователе' });
-            }
-            return rejectWithValue({ message: 'Неизвестная ошибка' });
+        } catch {
+            return rejectWithValue('Ошибка получения пользователей');
         }
     },
 );
@@ -39,7 +32,7 @@ export const deleteUser = createAsyncThunk('user/deleteUser', async (id: number)
 const initialState: IState = {
     users: [],
     status: 'idle',
-    error: '',
+    error: null,
 };
 
 const userSlice = createSlice({
@@ -57,7 +50,7 @@ const userSlice = createSlice({
                 state.status = 'succeeded';
             })
             .addCase(getUsers.rejected, (state, action) => {
-                state.error = action.payload as string;
+                state.error = (action.payload as string) || 'Ошибка получения пользователей';
             })
             .addCase(createUser.pending, (state) => {
                 state.status = 'loading';

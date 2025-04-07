@@ -35,7 +35,7 @@ export const CardsStatistics = ({ stats }: CardsStatisticsProps) => {
                             <Typography variant="h6">Клиенты</Typography>
                         </Box>
                         <Typography variant="h3" sx={{ fontWeight: 'bold' }}>
-                            {stats.totalClients}
+                            {stats?.totalClients}
                         </Typography>
                         <Typography variant="body2" sx={{ opacity: 0.8, mt: 1 }}>
                             Всего в базе
@@ -63,7 +63,7 @@ export const CardsStatistics = ({ stats }: CardsStatisticsProps) => {
                             <Typography variant="h6">Взаимодействия</Typography>
                         </Box>
                         <Typography variant="h3" sx={{ fontWeight: 'bold' }}>
-                            {stats.interactionsCurrent || 0}
+                            {stats?.interactionsCurrent || 0}
                         </Typography>
                         <Typography variant="body2" sx={{ opacity: 0.8, mt: 1 }}>
                             Зарегистрировано всего
@@ -91,7 +91,7 @@ export const CardsStatistics = ({ stats }: CardsStatisticsProps) => {
                             <Typography variant="h6">Среднее</Typography>
                         </Box>
                         <Typography variant="h3" sx={{ fontWeight: 'bold' }}>
-                            {stats.averageInteractionsPerClient || '0'}
+                            {stats?.averageInteractionsPerClient || '0'}
                         </Typography>
                         <Typography variant="body2" sx={{ opacity: 0.8, mt: 1 }}>
                             Взаимодействий на клиента
@@ -119,7 +119,7 @@ export const CardsStatistics = ({ stats }: CardsStatisticsProps) => {
                             <Typography variant="h6">Активность</Typography>
                         </Box>
                         <Typography variant="h3" sx={{ fontWeight: 'bold' }}>
-                            {stats.activityGrowth}%
+                            {stats?.activityGrowth}%
                         </Typography>
                         <Typography variant="body2" sx={{ opacity: 0.8, mt: 1 }}>
                             Рост за последний месяц

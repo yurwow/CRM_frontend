@@ -3,13 +3,11 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { TextField, Button, Box, Typography, Container, Alert } from '@mui/material';
 import { useNavigate } from 'react-router';
 import { LoginFormInputs, loginSchema } from '@/features/auth/model/LoginFormSchema.ts';
-import { login } from '@/features/auth/model/authSlice.ts';
-import { useAppDispatch, useAppSelector } from '@/shared/lib/hooks/reduxHooks.ts';
+import { useLoginMutation } from '@/features/auth/model/authApi.ts';
 
 const LoginForm = () => {
     const navigate = useNavigate();
-    const dispatch = useAppDispatch();
-    const { status, error } = useAppSelector((state) => state.auth);
+    const [login, { isLoading, error }] = useLoginMutation();
 
     const {
         register,
@@ -20,9 +18,12 @@ const LoginForm = () => {
     });
 
     const onSubmit = async (data: LoginFormInputs) => {
-        const resultAction = await dispatch(login(data));
-        if (login.fulfilled.match(resultAction)) {
+        try {
+            const result = await login(data).unwrap();
+            console.log('Авторизация успешна:', result);
             navigate('/');
+        } catch (err) {
+            console.error('Ошибка входа:', err);
         }
     };
 
@@ -44,7 +45,7 @@ const LoginForm = () => {
                         label="Email"
                         fullWidth
                         margin="normal"
-                        {...register(`email`)}
+                        {...register('email')}
                         error={!!errors.email}
                         helperText={errors.email?.message}
                     />
@@ -58,11 +59,11 @@ const LoginForm = () => {
                         helperText={errors.password?.message}
                     />
                     <Button type="submit" variant="contained" color="primary" fullWidth sx={{ mt: 2 }}>
-                        {status === 'loading' ? 'Загрузка...' : 'Войти'}
+                        {isLoading ? 'Загрузка...' : 'Войти'}
                     </Button>
                     {error && (
                         <Alert severity="error" sx={{ mt: 2 }}>
-                            {error}
+                            Ошибка входа
                         </Alert>
                     )}
                 </form>
