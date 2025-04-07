@@ -1,3 +1,4 @@
+/*
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import axios from 'axios';
 import { IState, User } from '@/entities/User/types.ts';
@@ -78,3 +79,4 @@ const userSlice = createSlice({
 });
 
 export default userSlice.reducer;
+*/

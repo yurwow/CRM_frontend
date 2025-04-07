@@ -1,13 +1,14 @@
-import { Card, CardContent, Typography, Divider, Stack, Box, TextField, Button } from '@mui/material';
+import { Stack, Card, CardContent, Divider, Box, TextField, Button, Typography } from '@mui/material';
 import { useParams } from 'react-router';
 import { useAppDispatch, useAppSelector } from '@/shared/lib/hooks/reduxHooks.ts';
 import { ChangeEvent, useEffect, useState } from 'react';
 import { getClientsById, updateClient } from '@/features/clients/model/clientSlice.ts';
-import CircularProgress from '@mui/material/CircularProgress';
 import { IAddClient, IClient } from '@/entities/Client/types.ts';
 import { toast } from 'react-toastify';
 import { clientFields, nameField } from '@/widgets/ClientInf/constant/clientFields.tsx';
 import WorkIcon from '@mui/icons-material/Apartment';
+import { SkeletonClientInf } from '@/widgets/SkeletonClientInf';
+import { ErrorClientLoading } from '@/widgets/ErrorClientLoading';
 
 export const ClientInf = () => {
     const { id } = useParams();
@@ -59,9 +60,9 @@ export const ClientInf = () => {
         }
     };
 
-    if (status === 'loading') return <CircularProgress sx={{ display: 'block', margin: '20px auto' }} />;
-    if (!currentClient) return <Typography>Клиент не найден</Typography>;
-    if (error) return <Typography color="error">{error}</Typography>;
+    if (status === 'loading') return <SkeletonClientInf/>
+
+    if (!currentClient || error) return <ErrorClientLoading/>;
 
     return (
         <Box sx={{ display: 'flex', justifyContent: 'center', mt: 4 }}>

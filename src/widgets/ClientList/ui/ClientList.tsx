@@ -9,24 +9,28 @@ import {
     TableHead,
     TableRow,
     Paper,
-    Typography,
-    CircularProgress,
     Stack,
     TextField,
     TableSortLabel,
     IconButton,
+    TablePagination,
 } from '@mui/material';
 import { useNavigate } from 'react-router';
 import { Visibility } from '@mui/icons-material';
 import { IClient } from '@/entities/Client/types.ts';
+import { SkeletonClientsTable } from '@/widgets/SkeletonClientsTable';
+import { ErrorLoading } from '@/widgets/ErrorLoading';
 
 export const ClientList = () => {
     const dispatch = useAppDispatch();
     const navigate = useNavigate();
-    const { clients, status, error } = useAppSelector((state) => state.clients);
+    const { clients, status } = useAppSelector((state) => state.clients);
+
     const [searchTerm, setSearchTerm] = useState('');
     const [orderBy, setOrderBy] = useState<keyof IClient>('name');
     const [order, setOrder] = useState<'asc' | 'desc'>('asc');
+    const [page, setPage] = useState(0);
+    const [rowsPerPage, setRowsPerPage] = useState(5);
 
     useEffect(() => {
         dispatch(getClients());
@@ -39,26 +43,49 @@ export const ClientList = () => {
     };
 
     const filteredClients = useMemo<IClient[]>(() => {
-        return clients
-            .filter((client) =>
-                Object.values(client).some((value) => typeof value === 'string' && value.toLowerCase().includes(searchTerm.toLowerCase())),
+        return clients.filter((client) =>
+            Object.values(client).some(
+                (value) =>
+                    typeof value === 'string' &&
+                    value.toLowerCase().includes(searchTerm.toLowerCase())
             )
-            .sort((a, b) => {
-                const aValue = a[orderBy] ?? '';
-                const bValue = b[orderBy] ?? '';
+        );
+    }, [clients, searchTerm]);
 
-                if (aValue < bValue) return order === 'asc' ? -1 : 1;
-                if (aValue > bValue) return order === 'asc' ? 1 : -1;
-                return 0;
-            });
-    }, [clients, searchTerm, orderBy, order]);
+    const sortedClients = useMemo<IClient[]>(() => {
+        return [...filteredClients].sort((a, b) => {
+            const aValue = a[orderBy] ?? '';
+            const bValue = b[orderBy] ?? '';
 
-    if (status === 'loading') return <CircularProgress sx={{ display: 'block', margin: '20px auto' }} />;
-    if (status === 'failed') return <Typography color="error">Ошибка загрузки: {error}</Typography>;
+            if (aValue < bValue) return order === 'asc' ? -1 : 1;
+            if (aValue > bValue) return order === 'asc' ? 1 : -1;
+            return 0;
+        });
+    }, [filteredClients, orderBy, order]);
+
+    const paginatedClients = useMemo<IClient[]>(() => {
+        const start = page * rowsPerPage;
+        return sortedClients.slice(start, start + rowsPerPage);
+    }, [sortedClients, page, rowsPerPage]);
+
+    if (status === 'loading') return <SkeletonClientsTable />;
+
+    if (status === 'failed') return <ErrorLoading/>
+
 
     return (
         <Stack spacing={3} alignItems="center" sx={{ width: '100%', maxWidth: 1200, margin: '0 auto', padding: 3 }}>
-            <TextField label="Поиск" variant="outlined" fullWidth value={searchTerm} onChange={(e) => setSearchTerm(e.target.value)} />
+            <TextField
+                label="Поиск"
+                variant="outlined"
+                fullWidth
+                value={searchTerm}
+                onChange={(e) => {
+                    setSearchTerm(e.target.value);
+                    setPage(0);
+                }}
+            />
+
             <TableContainer component={Paper} sx={{ boxShadow: 3, borderRadius: 2, width: '100%', overflowX: 'auto' }}>
                 <Table>
                     <TableHead>
@@ -85,8 +112,8 @@ export const ClientList = () => {
                         </TableRow>
                     </TableHead>
                     <TableBody>
-                        {filteredClients.length > 0 ? (
-                            filteredClients.map((client) => (
+                        {paginatedClients.length > 0 ? (
+                            paginatedClients.map((client) => (
                                 <TableRow key={client.id} hover>
                                     <TableCell>{client.name}</TableCell>
                                     <TableCell>{client.contact_person}</TableCell>
@@ -111,6 +138,20 @@ export const ClientList = () => {
                     </TableBody>
                 </Table>
             </TableContainer>
+
+            <TablePagination
+                component="div"
+                count={filteredClients.length}
+                page={page}
+                onPageChange={(_, newPage) => setPage(newPage)}
+                rowsPerPage={rowsPerPage}
+                onRowsPerPageChange={(e) => {
+                    setRowsPerPage(parseInt(e.target.value, 10));
+                    setPage(0);
+                }}
+                rowsPerPageOptions={[5, 10, 25, 50]}
+                labelRowsPerPage="Строк на странице:"
+            />
         </Stack>
     );
 };
