@@ -3,7 +3,7 @@ import { Button, Grid, MenuItem, TextField, Dialog, DialogContent, DialogTitle }
 import { useForm } from 'react-hook-form';
 import { toast } from 'react-toastify';
 import { AddClientButton } from '@/widgets/AddClientButton';
-import {useCreateUserMutation} from '@/features/users/model/userApi.ts'
+import { useCreateUserMutation } from '@/features/users/model/userApi.ts';
 
 const roles = ['manager', 'admin'];
 
@@ -26,7 +26,6 @@ export const CreateUser = () => {
     } = useForm<IFormInput>();
     const [loading, setLoading] = useState(false);
     const [createUser] = useCreateUserMutation();
-
 
     const handleClickOpen = () => {
         setOpen(true);
@@ -66,7 +65,7 @@ export const CreateUser = () => {
                 <DialogContent>
                     <form onSubmit={handleSubmit(onSubmit)}>
                         <Grid container spacing={2}>
-                            <Grid item sx={{mt: 1}} xs={12}>
+                            <Grid item sx={{ mt: 1 }} xs={12}>
                                 <TextField
                                     label="ФИО"
                                     {...register('full_name', { required: 'Поле обязательно для заполнения' })}

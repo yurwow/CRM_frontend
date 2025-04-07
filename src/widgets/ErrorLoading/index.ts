@@ -1,1 +1,1 @@
-export {ErrorLoading} from './ui/ErrorLoading.tsx'
+export { ErrorLoading } from './ui/ErrorLoading.tsx';

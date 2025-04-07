@@ -5,7 +5,7 @@ import { setupInterceptors } from '@/shared/api/api.ts';
 import interactionsSlice from '@/features/interactions/model/interactionsSlice.ts';
 // import { userSlice } from '@/features/users/model/userSlice.ts';
 import statisticsSlice from '@/features/statistics/model/statisticsSlice.ts';
-import {userApi} from '@/features/users/model/userApi.ts'
+import { userApi } from '@/features/users/model/userApi.ts';
 
 export const store = configureStore({
     reducer: {
@@ -16,9 +16,7 @@ export const store = configureStore({
         statistics: statisticsSlice,
         [userApi.reducerPath]: userApi.reducer,
     },
-    middleware: (getDefaultMiddleware) =>
-        getDefaultMiddleware()
-            .concat(userApi.middleware)
+    middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(userApi.middleware),
 });
 
 setupInterceptors(store);

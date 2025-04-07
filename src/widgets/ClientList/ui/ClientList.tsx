@@ -44,11 +44,7 @@ export const ClientList = () => {
 
     const filteredClients = useMemo<IClient[]>(() => {
         return clients.filter((client) =>
-            Object.values(client).some(
-                (value) =>
-                    typeof value === 'string' &&
-                    value.toLowerCase().includes(searchTerm.toLowerCase())
-            )
+            Object.values(client).some((value) => typeof value === 'string' && value.toLowerCase().includes(searchTerm.toLowerCase())),
         );
     }, [clients, searchTerm]);
 
@@ -70,8 +66,7 @@ export const ClientList = () => {
 
     if (status === 'loading') return <SkeletonClientsTable />;
 
-    if (status === 'failed') return <ErrorLoading/>
-
+    if (status === 'failed') return <ErrorLoading />;
 
     return (
         <Stack spacing={3} alignItems="center" sx={{ width: '100%', maxWidth: 1200, margin: '0 auto', padding: 3 }}>

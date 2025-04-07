@@ -60,9 +60,9 @@ export const ClientInf = () => {
         }
     };
 
-    if (status === 'loading') return <SkeletonClientInf/>
+    if (status === 'loading') return <SkeletonClientInf />;
 
-    if (!currentClient || error) return <ErrorClientLoading/>;
+    if (!currentClient || error) return <ErrorClientLoading />;
 
     return (
         <Box sx={{ display: 'flex', justifyContent: 'center', mt: 4 }}>

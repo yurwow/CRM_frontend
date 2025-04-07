@@ -1,14 +1,4 @@
-import {
-    Paper,
-    Skeleton,
-    Stack,
-    Table,
-    TableBody,
-    TableCell,
-    TableContainer,
-    TableHead,
-    TableRow,
-} from '@mui/material';
+import { Paper, Skeleton, Stack, Table, TableBody, TableCell, TableContainer, TableHead, TableRow } from '@mui/material';
 
 export const SkeletonUserTable = () => {
     return (

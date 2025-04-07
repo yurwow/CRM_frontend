@@ -2,7 +2,6 @@ import { Alert, Button, Stack } from '@mui/material';
 import { getClients } from '@/features/clients/model/clientSlice.ts';
 import { useAppDispatch, useAppSelector } from '@/shared/lib/hooks/reduxHooks.ts';
 
-
 export const ErrorLoading = () => {
     const dispatch = useAppDispatch();
     const { error } = useAppSelector((state) => state.clients);

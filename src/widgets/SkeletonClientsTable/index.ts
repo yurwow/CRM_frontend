@@ -1,1 +1,1 @@
-export {SkeletonClientsTable} from './ui/SkeletonClientsTable.tsx'
+export { SkeletonClientsTable } from './ui/SkeletonClientsTable.tsx';

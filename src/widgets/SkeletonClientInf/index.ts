@@ -1,1 +1,1 @@
-export {SkeletonClientInf} from './ui/SkeletonClientInf.tsx'
+export { SkeletonClientInf } from './ui/SkeletonClientInf.tsx';

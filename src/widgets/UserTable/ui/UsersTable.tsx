@@ -1,8 +1,5 @@
 import { useState } from 'react';
-import {
-    Table, TableBody, TableCell, TableContainer, TableHead, TableRow,
-    Paper, IconButton, Stack, TableSortLabel,
-} from '@mui/material';
+import { Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper, IconButton, Stack, TableSortLabel } from '@mui/material';
 import { Delete } from '@mui/icons-material';
 import { toast, ToastContainer } from 'react-toastify';
 
@@ -55,7 +52,7 @@ export const UsersTable = () => {
         setUserIdToDelete(null);
     };
 
-    if (isLoading) return <SkeletonUserTable/>
+    if (isLoading) return <SkeletonUserTable />;
 
     if (isError) return <div>Ошибка: Не удалось загрузить пользователей</div>;
 
