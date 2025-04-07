@@ -57,6 +57,7 @@ export const CreateInteractionModal = ({ open, onClose, client_id, editingIntera
                         date: data.date,
                     }),
                 );
+                toast.success('Изменения сохранены');
             } else {
                 dispatch(
                     addInteractionById({
@@ -66,8 +67,9 @@ export const CreateInteractionModal = ({ open, onClose, client_id, editingIntera
                         date: data.date,
                     }),
                 );
+                toast.success('Взаимодействие добавлено');
             }
-            toast.success('Взаимодействие добавлено');
+
             onClose();
             reset();
         } catch {
@@ -87,6 +89,7 @@ export const CreateInteractionModal = ({ open, onClose, client_id, editingIntera
                         {...register('type')}
                         error={!!errors.type}
                         helperText={errors.type?.message}
+                        defaultValue={editingInteraction?.type || null}
                     >
                         <MenuItem value="Звонок">Звонок</MenuItem>
                         <MenuItem value="Встреча">Встреча</MenuItem>

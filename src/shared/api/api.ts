@@ -29,9 +29,14 @@ export const setupInterceptors = (store: AppStore) => {
                         return api(error.config);
                     } else {
                         store.dispatch(logout());
+                        localStorage.removeItem('accessToken');
+                        localStorage.removeItem('refreshToken');
                         return Promise.reject(error);
                     }
                 } catch {
+                    store.dispatch(logout());
+                    localStorage.removeItem('accessToken');
+                    localStorage.removeItem('refreshToken');
                     return Promise.reject(error);
                 }
             }

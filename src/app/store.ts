@@ -4,6 +4,7 @@ import clientSlice from '@/features/clients/model/clientSlice.ts';
 import { setupInterceptors } from '@/shared/api/api.ts';
 import interactionsSlice from '@/features/interactions/model/interactionsSlice.ts';
 import userSlice from '@/features/users/model/userSlice.ts';
+import statisticsSlice from '@/features/statistics/model/statisticsSlice.ts';
 
 export const store = configureStore({
     reducer: {
@@ -11,6 +12,7 @@ export const store = configureStore({
         clients: clientSlice,
         interactions: interactionsSlice,
         users: userSlice,
+        statistics: statisticsSlice,
     },
 });
 

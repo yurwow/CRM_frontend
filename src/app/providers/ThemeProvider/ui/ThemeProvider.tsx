@@ -6,6 +6,4 @@ interface ThemeProviderProps {
     children?: ReactNode;
 }
 
-export const ThemeProvider: FC<ThemeProviderProps> = ({ children }) => (
-    <MUIThemeProvider theme={theme}>{children}</MUIThemeProvider>
-);
+export const ThemeProvider: FC<ThemeProviderProps> = ({ children }) => <MUIThemeProvider theme={theme}>{children}</MUIThemeProvider>;

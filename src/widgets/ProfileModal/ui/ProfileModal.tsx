@@ -1,7 +1,7 @@
 import { Modal, Box, Typography, Button, DialogActions } from '@mui/material';
 import { useEffect } from 'react';
 import { useAppDispatch, useAppSelector } from '@/shared/lib/hooks/reduxHooks.ts';
-import { getUser } from '@/features/users/model/userSlice.ts';
+import { getUsers } from '@/features/users/model/userSlice.ts';
 
 interface IProps {
     open: boolean;
@@ -12,7 +12,7 @@ export const ProfileModal = ({ open, handleClose }: IProps) => {
     const dispatch = useAppDispatch();
 
     useEffect(() => {
-        dispatch(getUser());
+        dispatch(getUsers());
     }, [dispatch]);
 
     const users = {

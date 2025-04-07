@@ -8,17 +8,14 @@ const initialState: IState = {
     error: null,
 };
 
-export const getInteractionsById = createAsyncThunk(
-    'interactions/fetchByClientId',
-    async ({ id }: { id: number }, { rejectWithValue }) => {
-        try {
-            const response = await api.get(`/interactions/client/${id}`);
-            return response.data;
-        } catch {
-            return rejectWithValue('Ошибка загрузки взаимодействий');
-        }
-    },
-);
+export const getInteractionsById = createAsyncThunk('interactions/fetchByClientId', async ({ id }: { id: number }, { rejectWithValue }) => {
+    try {
+        const response = await api.get(`/interactions/client/${id}`);
+        return response.data;
+    } catch {
+        return rejectWithValue('Ошибка загрузки взаимодействий');
+    }
+});
 
 export const addInteractionById = createAsyncThunk(
     'interactions/add',
@@ -43,17 +40,14 @@ export const updateInteractionById = createAsyncThunk(
         }
     },
 );
-export const removeInteractionById = createAsyncThunk(
-    'interactions/delete',
-    async ({ id }: { id: number }, { rejectWithValue }) => {
-        try {
-            await api.delete(`/interactions/${id}`);
-            return id;
-        } catch {
-            return rejectWithValue('Ошибка удаления взаимодействия');
-        }
-    },
-);
+export const removeInteractionById = createAsyncThunk('interactions/delete', async ({ id }: { id: number }, { rejectWithValue }) => {
+    try {
+        await api.delete(`/interactions/${id}`);
+        return id;
+    } catch {
+        return rejectWithValue('Ошибка удаления взаимодействия');
+    }
+});
 
 export const interactionsSlice = createSlice({
     name: 'interactions',

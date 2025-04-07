@@ -3,14 +3,11 @@ import { useParams } from 'react-router';
 import { useAppDispatch, useAppSelector } from '@/shared/lib/hooks/reduxHooks.ts';
 import { ChangeEvent, useEffect, useState } from 'react';
 import { getClientsById, updateClient } from '@/features/clients/model/clientSlice.ts';
-import ContactMailIcon from '@mui/icons-material/ContactMail';
-import PhoneIcon from '@mui/icons-material/Phone';
-import EmailIcon from '@mui/icons-material/Email';
-import HomeIcon from '@mui/icons-material/Home';
-import BusinessIcon from '@mui/icons-material/Business';
 import CircularProgress from '@mui/material/CircularProgress';
-import { IAddClient } from '@/entities/Client/types.ts';
+import { IAddClient, IClient } from '@/entities/Client/types.ts';
 import { toast } from 'react-toastify';
+import { clientFields, nameField } from '@/widgets/ClientInf/constant/clientFields.tsx';
+import WorkIcon from '@mui/icons-material/Apartment';
 
 export const ClientInf = () => {
     const { id } = useParams();
@@ -81,55 +78,41 @@ export const ClientInf = () => {
                 }}
             >
                 <CardContent>
-                    <Typography variant="h4" fontWeight="bold" gutterBottom sx={{ textAlign: 'center' }}>
-                        {isEditing ? 'Редактировать клиента' : currentClient.name}
-                    </Typography>
-                    <Divider sx={{ mb: 3 }} />
+                    {isEditing ? (
+                        <>
+                            <Stack direction="row" alignItems="center" spacing={2} sx={{ p: 1, borderRadius: 2, bgcolor: '#f9f9f9' }}>
+                                <Box
+                                    sx={{
+                                        color: 'primary.main',
+                                        display: 'flex',
+                                        alignItems: 'center',
+                                        justifyContent: 'center',
+                                        width: 36,
+                                        height: 36,
+                                    }}
+                                >
+                                    <WorkIcon color="primary" />
+                                </Box>
+                                <TextField
+                                    fullWidth
+                                    variant="outlined"
+                                    label={nameField.label}
+                                    name={nameField.name}
+                                    value={clientData?.[nameField.name as keyof IClient] || ''}
+                                    onChange={handleChange}
+                                    sx={{ mb: 2 }}
+                                />
+                            </Stack>
+                        </>
+                    ) : (
+                        <Typography variant="h4" fontWeight="bold" gutterBottom sx={{ textAlign: 'center' }}>
+                            {currentClient.name}
+                        </Typography>
+                    )}
+                    {!isEditing && <Divider sx={{ mb: 3 }} />}
                     <Stack spacing={2}>
-                        {[
-                            {
-                                icon: <ContactMailIcon />,
-                                label: 'Контактное лицо',
-                                name: 'contact_person',
-                                value: clientData?.contact_person || '',
-                                color: 'primary.main',
-                            },
-                            {
-                                icon: <PhoneIcon />,
-                                label: 'Телефон',
-                                name: 'phone',
-                                value: clientData?.phone || '',
-                                color: 'green',
-                            },
-                            {
-                                icon: <EmailIcon />,
-                                label: 'Email',
-                                name: 'email',
-                                value: clientData?.email || '',
-                                color: 'red',
-                            },
-                            {
-                                icon: <HomeIcon />,
-                                label: 'Адрес',
-                                name: 'address',
-                                value: clientData?.address || '',
-                                color: 'orange',
-                            },
-                            {
-                                icon: <BusinessIcon />,
-                                label: 'Индустрия',
-                                name: 'industry',
-                                value: clientData?.industry || '',
-                                color: 'purple',
-                            },
-                        ].map(({ icon, label, name, value, color }, index) => (
-                            <Stack
-                                key={index}
-                                direction="row"
-                                alignItems="center"
-                                spacing={2}
-                                sx={{ p: 1, borderRadius: 2, bgcolor: '#f9f9f9' }}
-                            >
+                        {clientFields.map(({ icon, label, name, color }, index) => (
+                            <Stack key={index} direction="row" alignItems="center" spacing={2} sx={{ p: 1, borderRadius: 2, bgcolor: '#f9f9f9' }}>
                                 <Box
                                     sx={{
                                         color,
@@ -148,12 +131,12 @@ export const ClientInf = () => {
                                         variant="outlined"
                                         label={label}
                                         name={name}
-                                        value={value}
+                                        value={clientData?.[name as keyof IClient] || ''}
                                         onChange={handleChange}
                                     />
                                 ) : (
                                     <Typography variant="body1">
-                                        <b>{label}:</b> {value}
+                                        <b>{label}:</b> {clientData?.[name as keyof IClient] || ''}
                                     </Typography>
                                 )}
                             </Stack>
@@ -170,13 +153,7 @@ export const ClientInf = () => {
                             </Button>
                         </Stack>
                     ) : (
-                        <Button
-                            variant="outlined"
-                            color="primary"
-                            fullWidth
-                            sx={{ mt: 3 }}
-                            onClick={() => setIsEditing(true)}
-                        >
+                        <Button variant="outlined" color="primary" fullWidth sx={{ mt: 3 }} onClick={() => setIsEditing(true)}>
                             Редактировать информацию
                         </Button>
                     )}

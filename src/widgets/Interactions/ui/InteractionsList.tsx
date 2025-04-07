@@ -1,22 +1,11 @@
-import {
-    CircularProgress,
-    IconButton,
-    List,
-    ListItem,
-    ListItemText,
-    Typography,
-    Paper,
-    Chip,
-    Fade,
-    Box,
-    Divider,
-} from '@mui/material';
+import { CircularProgress, IconButton, List, ListItem, ListItemText, Typography, Paper, Chip, Fade, Box, Divider } from '@mui/material';
 import { useAppDispatch, useAppSelector } from '@/shared/lib/hooks/reduxHooks.ts';
 import { useNavigate, useParams } from 'react-router';
 import { useEffect, useState } from 'react';
 import { getInteractionsById, removeInteractionById } from '@/features/interactions/model/interactionsSlice.ts';
 import { CreateInteractionModal } from '@/widgets/CreateInteractionModal';
 import { DeleteConfirmationModal } from '@/widgets/DeleteConfirmationModal';
+import { InteractionDetailModal } from '@/widgets/InteractionDetailModal';
 import EditIcon from '@mui/icons-material/Edit';
 import DeleteIcon from '@mui/icons-material/Delete';
 import { IInteraction } from '@/entities/Interactions/types.ts';
@@ -30,19 +19,17 @@ export const InteractionsList = () => {
     const { id } = useParams();
     const dispatch = useAppDispatch();
     const navigate = useNavigate();
-    const {
-        interactions,
-        status: interactionsStatus,
-        error: interactionsError,
-    } = useAppSelector((state) => state.interactions);
+    const { interactions, status: interactionsStatus, error: interactionsError } = useAppSelector((state) => state.interactions);
 
     useEffect(() => {
         dispatch(getInteractionsById({ id: Number(id) }));
     }, [dispatch, id]);
-
     const [open, setOpen] = useState(false);
     const [editingInteraction, setEditingInteraction] = useState<IInteraction | null>(null);
     const [openDeleteDialog, setOpenDeleteDialog] = useState(false);
+
+    const [detailModalOpen, setDetailModalOpen] = useState(false);
+    const [selectedInteraction, setSelectedInteraction] = useState<IInteraction | null>(null);
 
     const handleDelete = () => {
         try {
@@ -59,6 +46,11 @@ export const InteractionsList = () => {
     const handleEdit = (interaction: IInteraction) => {
         setEditingInteraction(interaction);
         setOpen(true);
+    };
+
+    const handleViewDetails = (interaction: IInteraction) => {
+        setSelectedInteraction(interaction);
+        setDetailModalOpen(true);
     };
 
     const handleDeleteInteraction = async (interactionId?: number) => {
@@ -88,25 +80,21 @@ export const InteractionsList = () => {
                     bgcolor: 'linear-gradient(135deg, #ffffff, #f0f4ff)',
                     transition: 'transform 0.3s ease-in-out',
                     '&:hover': { transform: 'scale(1.02)' },
+                    mb: 4,
                 }}
             >
-                {interactionsStatus === 'loading' && (
-                    <CircularProgress sx={{ display: 'block', margin: '20px auto' }} />
-                )}
+                {interactionsStatus === 'loading' && <CircularProgress sx={{ display: 'block', margin: '20px auto' }} />}
                 {interactionsError && <Typography color="error">{interactionsError}</Typography>}
 
                 <Fade in={true} timeout={600}>
-                    <Paper
-                        elevation={6}
-                        sx={{ p: 3, borderRadius: 4, bgcolor: '#fff', boxShadow: '0px 4px 12px rgba(0, 0, 0, 0.15)' }}
-                    >
+                    <Paper elevation={6} sx={{ p: 2, borderRadius: 4, bgcolor: '#fff', boxShadow: '0px 4px 12px rgba(0, 0, 0, 0.15)' }}>
                         {interactions.length === 0 ? (
                             <Typography textAlign="center" sx={{ fontStyle: 'italic', color: 'gray' }}>
                                 Нет взаимодействий
                             </Typography>
                         ) : (
                             <List>
-                                {interactions.map((interaction) => (
+                                {interactions.map((interaction, index) => (
                                     <Box key={interaction.id}>
                                         <ListItem
                                             sx={{
@@ -115,22 +103,30 @@ export const InteractionsList = () => {
                                                 borderRadius: 2,
                                                 bgcolor: '#fafafa',
                                                 boxShadow: '0px 2px 8px rgba(0, 0, 0, 0.05)',
-                                                mb: 1,
+                                                mb: 0,
                                                 transition: '0.3s ease-in-out',
                                                 '&:hover': { backgroundColor: '#eef2ff' },
+                                                cursor: 'pointer',
                                             }}
+                                            onClick={() => handleViewDetails(interaction)}
                                             secondaryAction={
                                                 <>
                                                     <IconButton
                                                         color="primary"
-                                                        onClick={() => handleEdit(interaction)}
+                                                        onClick={(e) => {
+                                                            e.stopPropagation();
+                                                            handleEdit(interaction);
+                                                        }}
                                                         sx={{ mr: 1 }}
                                                     >
                                                         <EditIcon />
                                                     </IconButton>
                                                     <IconButton
                                                         color="error"
-                                                        onClick={() => handleDeleteInteraction(interaction.id)}
+                                                        onClick={(e) => {
+                                                            e.stopPropagation();
+                                                            handleDeleteInteraction(interaction.id);
+                                                        }}
                                                     >
                                                         <DeleteIcon />
                                                     </IconButton>
@@ -161,9 +157,7 @@ export const InteractionsList = () => {
                                                                 WebkitBoxOrient: 'vertical',
                                                             }}
                                                         >
-                                                            {interaction.notes
-                                                                ? `📝 ${interaction.notes}`
-                                                                : 'Без заметок'}
+                                                            {interaction.notes ? `📝 ${interaction.notes}` : 'Без заметок'}
                                                         </Box>
                                                     </Typography>
                                                 }
@@ -177,7 +171,8 @@ export const InteractionsList = () => {
                                                 }
                                             />
                                         </ListItem>
-                                        <Divider variant="middle" sx={{ my: 1 }} />
+
+                                        {index < interactions.length - 1 && <Divider variant="middle" sx={{ my: 1 }} />}
                                     </Box>
                                 ))}
                             </List>
@@ -194,10 +189,14 @@ export const InteractionsList = () => {
                     client_id={Number(id)}
                     editingInteraction={editingInteraction}
                 />
-                <DeleteConfirmationModal
-                    open={openDeleteDialog}
-                    onClose={() => setOpenDeleteDialog(false)}
-                    onConfirm={handleDelete}
+                <DeleteConfirmationModal open={openDeleteDialog} onClose={() => setOpenDeleteDialog(false)} onConfirm={handleDelete} />
+                <InteractionDetailModal
+                    open={detailModalOpen}
+                    onClose={() => {
+                        setDetailModalOpen(false);
+                        setSelectedInteraction(null);
+                    }}
+                    interaction={selectedInteraction}
                 />
             </Box>
             <FabButton onAddClick={() => setOpen(true)} onDeleteClick={() => setOpenDeleteDialog(true)} />

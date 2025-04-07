@@ -41,9 +41,7 @@ export const ClientList = () => {
     const filteredClients = useMemo<IClient[]>(() => {
         return clients
             .filter((client) =>
-                Object.values(client).some(
-                    (value) => typeof value === 'string' && value.toLowerCase().includes(searchTerm.toLowerCase()),
-                ),
+                Object.values(client).some((value) => typeof value === 'string' && value.toLowerCase().includes(searchTerm.toLowerCase())),
             )
             .sort((a, b) => {
                 const aValue = a[orderBy] ?? '';
@@ -60,13 +58,7 @@ export const ClientList = () => {
 
     return (
         <Stack spacing={3} alignItems="center" sx={{ width: '100%', maxWidth: 1200, margin: '0 auto', padding: 3 }}>
-            <TextField
-                label="Поиск"
-                variant="outlined"
-                fullWidth
-                value={searchTerm}
-                onChange={(e) => setSearchTerm(e.target.value)}
-            />
+            <TextField label="Поиск" variant="outlined" fullWidth value={searchTerm} onChange={(e) => setSearchTerm(e.target.value)} />
             <TableContainer component={Paper} sx={{ boxShadow: 3, borderRadius: 2, width: '100%', overflowX: 'auto' }}>
                 <Table>
                     <TableHead>

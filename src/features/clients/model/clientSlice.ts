@@ -18,17 +18,14 @@ export const getClients = createAsyncThunk('clients/fetchClients', async (_, { r
     }
 });
 
-export const getClientsById = createAsyncThunk(
-    'clients/fetchClientsById',
-    async ({ id }: { id: number }, { rejectWithValue }) => {
-        try {
-            const res = await api.get(`/clients/${id}`);
-            return res.data;
-        } catch {
-            return rejectWithValue('Ошибка получения клиентов');
-        }
-    },
-);
+export const getClientsById = createAsyncThunk('clients/fetchClientsById', async ({ id }: { id: number }, { rejectWithValue }) => {
+    try {
+        const res = await api.get(`/clients/${id}`);
+        return res.data;
+    } catch {
+        return rejectWithValue('Ошибка получения клиентов');
+    }
+});
 
 export const addClient = createAsyncThunk('clients/addClient', async (clientData: IAddClient, { rejectWithValue }) => {
     try {
@@ -51,17 +48,14 @@ export const updateClient = createAsyncThunk(
     },
 );
 
-export const DeleteClientById = createAsyncThunk(
-    'clients/DeleteClientById',
-    async ({ id }: { id: number }, { rejectWithValue }) => {
-        try {
-            const res = await api.delete(`/clients/${id}`);
-            return res.data;
-        } catch {
-            return rejectWithValue('Ошибка удаления клиента');
-        }
-    },
-);
+export const DeleteClientById = createAsyncThunk('clients/DeleteClientById', async ({ id }: { id: number }, { rejectWithValue }) => {
+    try {
+        const res = await api.delete(`/clients/${id}`);
+        return res.data;
+    } catch {
+        return rejectWithValue('Ошибка удаления клиента');
+    }
+});
 
 const clientSlice = createSlice({
     name: 'clients',
@@ -101,9 +95,7 @@ const clientSlice = createSlice({
                 state.error = action.payload as string;
             })
             .addCase(updateClient.fulfilled, (state, action) => {
-                state.clients = state.clients.map((client) =>
-                    client.id === action.payload.id ? action.payload : client,
-                );
+                state.clients = state.clients.map((client) => (client.id === action.payload.id ? action.payload : client));
                 state.status = 'succeeded';
             })
             .addCase(updateClient.rejected, (state, action) => {
