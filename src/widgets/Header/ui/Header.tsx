@@ -35,6 +35,9 @@ export const Header = () => {
                         <Button color="inherit" onClick={() => navigate('/statistics')} sx={{ fontSize: '1rem', mx: 1 }}>
                             Статистика
                         </Button>
+                        <Button color="inherit" onClick={() => navigate('/contractors')} sx={{ fontSize: '1rem', mx: 1 }}>
+                            Подрядчики
+                        </Button>
                     </Box>
                     <LogoutButton />
                 </Toolbar>

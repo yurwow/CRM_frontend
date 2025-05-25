@@ -3,9 +3,10 @@ import authSlice from '@/features/auth/model/authSlice.ts';
 import clientSlice from '@/features/clients/model/clientSlice.ts';
 import { setupInterceptors } from '@/shared/api/api.ts';
 import interactionsSlice from '@/features/interactions/model/interactionsSlice.ts';
-// import { userSlice } from '@/features/users/model/userSlice.ts';
 import statisticsSlice from '@/features/statistics/model/statisticsSlice.ts';
 import { userApi } from '@/features/users/model/userApi.ts';
+import { contractorsApi } from '@/features/contractors/model/contractorsApi.ts';
+import { reviewApi } from '@/features/reviews/model/reviewApi.ts';
 
 export const store = configureStore({
     reducer: {
@@ -15,8 +16,10 @@ export const store = configureStore({
         // users: userSlice,
         statistics: statisticsSlice,
         [userApi.reducerPath]: userApi.reducer,
+        [contractorsApi.reducerPath]: contractorsApi.reducer,
+        [reviewApi.reducerPath]: reviewApi.reducer,
     },
-    middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(userApi.middleware),
+    middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(userApi.middleware, contractorsApi.middleware, reviewApi.middleware),
 });
 
 setupInterceptors(store);

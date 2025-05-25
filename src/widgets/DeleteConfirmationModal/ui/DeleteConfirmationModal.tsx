@@ -4,13 +4,14 @@ interface DeleteConfirmationModalProps {
     open: boolean;
     onClose: () => void;
     onConfirm: () => void;
+    text?: string;
 }
 
-export const DeleteConfirmationModal = ({ open, onClose, onConfirm }: DeleteConfirmationModalProps) => {
+export const DeleteConfirmationModal = ({ open, onClose, onConfirm, text = 'клиента' }: DeleteConfirmationModalProps) => {
     return (
         <Dialog open={open} onClose={onClose}>
             <DialogTitle>Подтверждение удаления</DialogTitle>
-            <DialogContent>Вы уверены, что хотите удалить клиента? Это действие нельзя будет отменить.</DialogContent>
+            <DialogContent>Вы уверены, что хотите удалить {text}? Это действие нельзя будет отменить.</DialogContent>
             <DialogActions>
                 <Button onClick={onClose} color="primary">
                     Отмена

@@ -22,7 +22,7 @@ export const clientSchema = z.object({
         .refine((val) => !val || /^\+7 \(\d{3}\) \d{3}-\d{2}-\d{2}$/.test(val), {
             message: 'Введите номер в формате +7 (999) 999-99-99',
         }),
-    email: z.string().email('Некорректный email').optional().or(z.literal('')),
+    email: z.string().optional().or(z.string().min(3, 'Некорректный mail')),
     address: z.string().optional().or(z.string().min(5, 'Минимум 5 символов')),
     industry: z.string().optional().or(z.string().min(3, 'Минимум 3 символа')),
 });

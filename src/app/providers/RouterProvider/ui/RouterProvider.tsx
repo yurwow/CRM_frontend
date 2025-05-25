@@ -10,6 +10,8 @@ import { NotFoundPage } from '@/pages/404Page';
 import { AdminPage } from '@/pages/AdminPage';
 import { PrivateAdminRouter } from '@/app/providers/PrivateAdminRouter/ui/PrivateAdminRouter.tsx';
 import { ForbiddenPage } from '@/pages/403Page';
+import { ContractorsPage } from '@/pages/ContractorsPage';
+import { ReviewPage } from '@/pages/ReviewPage';
 
 export const RouterProvider = () => {
     return (
@@ -23,6 +25,8 @@ export const RouterProvider = () => {
                     <Route path="/" element={<HomePage />} />
                     <Route path="/clients/:id" element={<ClientPage />} />
                     <Route path="/statistics" element={<StatisticsPage />} />
+                    <Route path="/contractors" element={<ContractorsPage />} />
+                    <Route path="/contractors/:id" element={<ReviewPage />} />
                 </Route>
                 <Route path="/forbidden" element={<ForbiddenPage />} />
                 <Route path="*" element={<NotFoundPage />} />
