@@ -1,5 +1,4 @@
 import { Header } from '@/widgets/Header';
-import { ToastContainer } from 'react-toastify';
 import { CreateUser } from '@/widgets/CreateUser';
 import { UsersTable } from '@/widgets/UserTable';
 
@@ -9,7 +8,6 @@ const AdminPage = () => {
             <Header />
             <CreateUser />
             <UsersTable />
-            <ToastContainer />
         </div>
     );
 };

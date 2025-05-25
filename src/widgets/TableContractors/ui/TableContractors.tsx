@@ -16,9 +16,11 @@ import {
     TableRow,
     TableSortLabel,
     TextField,
+    Tooltip,
     Typography,
 } from '@mui/material';
 import { Visibility } from '@mui/icons-material';
+import { getReviewWord } from '@/widgets/TableContractors/helper/reviewWord.ts';
 
 export const TableContractors = () => {
     const { data, isLoading, isError } = useGetContractorsQuery();
@@ -121,11 +123,25 @@ export const TableContractors = () => {
                                     <TableCell>{contractor.address}</TableCell>
                                     <TableCell>{contractor.specialization}</TableCell>
                                     <TableCell>
-                                        {contractor.average_rating !== null && contractor.average_rating !== undefined ? (
-                                            <Rating name="read-only" value={parseFloat(contractor.average_rating) || 0} precision={0.1} readOnly />
-                                        ) : (
-                                            <Rating name="read-only" value={0} precision={0.1} readOnly />
-                                        )}
+                                        <Stack direction="column" alignItems="flex-start">
+                                            <Tooltip
+                                                title={
+                                                    contractor.reviews?.length
+                                                        ? `${Number(contractor.average_rating).toFixed(2)} на основе ${contractor.reviews.length} ${getReviewWord(contractor.reviews.length)}`
+                                                        : 'Нет отзывов'
+                                                }
+                                                arrow
+                                            >
+                                                <span>
+                                                    <Rating
+                                                        name="read-only"
+                                                        value={contractor.average_rating ? parseFloat(contractor.average_rating) : 0}
+                                                        precision={0.1}
+                                                        readOnly
+                                                    />
+                                                </span>
+                                            </Tooltip>
+                                        </Stack>
                                     </TableCell>
 
                                     <TableCell>

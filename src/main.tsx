@@ -6,6 +6,7 @@ import App from '@/app/App.tsx';
 import { ErrorBoundary } from '@/app/providers/ErrorBoundary';
 import { BrowserRouter } from 'react-router';
 import { StoreProvider } from '@/app/providers/StoreProvider/StoreProvider.tsx';
+import { ToastContainer } from 'react-toastify';
 
 createRoot(document.getElementById('root')!).render(
     <StrictMode>
@@ -14,6 +15,7 @@ createRoot(document.getElementById('root')!).render(
                 <ErrorBoundary>
                     <StoreProvider>
                         <App />
+                        <ToastContainer autoClose={3000} />
                     </StoreProvider>
                 </ErrorBoundary>
             </ThemeProvider>

@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper, IconButton, Stack, TableSortLabel } from '@mui/material';
 import { Delete } from '@mui/icons-material';
-import { toast, ToastContainer } from 'react-toastify';
+import { toast } from 'react-toastify';
 
 import { DeleteUserConfirmationModal } from '@/widgets/DeleteUserConfirmationModal';
 import { User } from '@/entities/User/types.ts';
@@ -93,7 +93,6 @@ export const UsersTable = () => {
                     </TableBody>
                 </Table>
             </TableContainer>
-            <ToastContainer />
         </Stack>
     );
 };

@@ -4,6 +4,7 @@ import { useParams } from 'react-router';
 import { useState } from 'react';
 import { DeleteConfirmationModal } from '@/widgets/DeleteConfirmationModal';
 import { useGetMeQuery } from '@/features/users/model/userApi.ts';
+import { toast } from 'react-toastify';
 
 export const ReviewList = () => {
     const { id } = useParams();
@@ -23,8 +24,10 @@ export const ReviewList = () => {
         if (selectedReviewId !== null) {
             try {
                 await deleteReview(selectedReviewId).unwrap();
+                toast.success('Отзыв успешно удален!');
             } catch (error) {
                 console.error('Ошибка при удалении отзыва:', error);
+                toast.error('Ошибка при удалении отзыва!');
             } finally {
                 setOpenModal(false);
                 setSelectedReviewId(null);

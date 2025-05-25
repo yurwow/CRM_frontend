@@ -4,6 +4,7 @@ import { useParams } from 'react-router';
 import { ReviewList } from '@/widgets/ReviewList';
 import { CardContractor } from '@/widgets/CardContractor';
 import { AddReview } from '@/widgets/AddReview';
+import { DeleteContractorButton } from '@/widgets/DeleteContractorButton';
 
 const ReviewPage = () => {
     const { id } = useParams();
@@ -17,6 +18,7 @@ const ReviewPage = () => {
                 <AddReview contractorId={contractorId} />
                 <ReviewList />
             </Container>
+            <DeleteContractorButton contractorId={contractorId} />
         </>
     );
 };
