@@ -5,10 +5,15 @@ import { ReviewList } from '@/widgets/ReviewList';
 import { CardContractor } from '@/widgets/CardContractor';
 import { AddReview } from '@/widgets/AddReview';
 import { DeleteContractorButton } from '@/widgets/DeleteContractorButton';
+import { useEffect } from 'react';
 
 const ReviewPage = () => {
     const { id } = useParams();
     const contractorId = Number(id);
+
+    useEffect(() => {
+        document.title = 'Подрядчик | Clients CRM';
+    }, []);
 
     return (
         <>

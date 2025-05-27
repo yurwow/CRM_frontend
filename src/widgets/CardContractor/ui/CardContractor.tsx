@@ -14,6 +14,7 @@ interface ContractorFormData {
     phone: string;
     address: string;
     specialization: string;
+    info: string;
     contact_person: string;
     average_rating: string | null;
 }
@@ -22,7 +23,6 @@ export const CardContractor = ({ contractorId }: Props) => {
     const [isEditing, setIsEditing] = useState(false);
     const [updateContractor] = useUpdateContractorMutation();
     const { data: contractorData, isLoading, isError } = useGetContractorByIdQuery(contractorId);
-
     const {
         control,
         handleSubmit,
@@ -36,6 +36,7 @@ export const CardContractor = ({ contractorId }: Props) => {
             phone: '',
             address: '',
             specialization: '',
+            info: '',
             contact_person: '',
             average_rating: null,
         },
@@ -47,6 +48,7 @@ export const CardContractor = ({ contractorId }: Props) => {
         if (contractorData) {
             reset(contractorData);
         }
+
     }, [contractorData, reset]);
 
     const onSubmit = async (data: ContractorFormData) => {
@@ -83,7 +85,13 @@ export const CardContractor = ({ contractorId }: Props) => {
                                 control={control}
                                 rules={{ required: 'Название обязательно' }}
                                 render={({ field, fieldState: { error } }) => (
-                                    <TextField {...field} fullWidth label="Название" error={!!error} helperText={error?.message} sx={{ mb: 2 }} />
+                                    <TextField {...field}
+                                       fullWidth
+                                       label="Название"
+                                       error={!!error}
+                                       helperText={error?.message}
+                                       sx={{ mb: 2 }}
+                                    />
                                 )}
                             />
 
@@ -114,7 +122,13 @@ export const CardContractor = ({ contractorId }: Props) => {
                                 name="phone"
                                 control={control}
                                 render={({ field, fieldState: { error } }) => (
-                                    <TextField {...field} fullWidth label="Телефон" error={!!error} helperText={error?.message} sx={{ mb: 2 }} />
+                                    <TextField {...field}
+                                       fullWidth
+                                       label="Телефон"
+                                       error={!!error}
+                                       helperText={error?.message}
+                                       sx={{ mb: 2 }}
+                                    />
                                 )}
                             />
 
@@ -149,6 +163,24 @@ export const CardContractor = ({ contractorId }: Props) => {
                             />
 
                             <Controller
+                                name="info"
+                                control={control}
+                                render={({ field, fieldState: { error } }) => (
+                                    <TextField
+                                        {...field}
+                                        fullWidth
+                                        multiline
+                                        rows={4}
+                                        label="Дополнительная информация"
+                                        error={!!error}
+                                        helperText={error?.message}
+                                        sx={{ mb: 2 }}
+                                    />
+                                )}
+                            />
+
+
+                            <Controller
                                 name="address"
                                 control={control}
                                 render={({ field, fieldState: { error } }) => (
@@ -174,6 +206,7 @@ export const CardContractor = ({ contractorId }: Props) => {
                             <Typography color="text.secondary">📞 {watchedValues.phone}</Typography>
                             <Typography color="text.secondary">👤 Контактное лицо: {watchedValues.contact_person}</Typography>
                             <Typography color="text.secondary">🛠️ Специализация: {watchedValues.specialization}</Typography>
+                            <Typography color="text.secondary">📝 Дополнительная информация: {watchedValues.info}</Typography>
                             <Typography color="text.secondary">📍 Адрес: {watchedValues.address}</Typography>
                         </>
                     )}

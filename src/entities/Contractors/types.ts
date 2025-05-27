@@ -7,6 +7,7 @@ export interface Contractor {
     phone: string;
     email: string;
     specialization: string;
+    info: string;
     address: string;
     readonly created_at: string;
     readonly updated_at: string;

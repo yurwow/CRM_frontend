@@ -12,6 +12,10 @@ const LoginPage = () => {
         }
     }, [token, navigate]);
 
+    useEffect(() => {
+        document.title = 'Вход | Clients CRM';
+    }, []);
+
     return (
         <>
             <LoginForm />

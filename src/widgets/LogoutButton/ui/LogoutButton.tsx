@@ -2,13 +2,16 @@ import { Button, Dialog, DialogActions, DialogContent, DialogTitle } from '@mui/
 import { logout } from '@/features/auth/model/authSlice.ts';
 import { useAppDispatch } from '@/shared/lib/hooks/reduxHooks.ts';
 import { useState } from 'react';
+import { useNavigate } from 'react-router';
 
 export const LogoutButton = () => {
     const dispatch = useAppDispatch();
+    const navigate = useNavigate();
     const [open, setOpen] = useState(false);
 
-    const handleLogout = () => {
-        dispatch(logout());
+    const handleLogout = async () => {
+        await dispatch(logout());
+        navigate('/login');
     };
 
     return (

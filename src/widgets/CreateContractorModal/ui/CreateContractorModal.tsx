@@ -17,7 +17,7 @@ export const CreateContractorModal = () => {
         control,
         formState: { errors },
         reset,
-    } = useForm();
+    } = useForm<Partial<Contractor>>();
 
     useEffect(() => {
         if (open) reset();
@@ -84,9 +84,20 @@ export const CreateContractorModal = () => {
                             label="Специализация"
                             fullWidth
                             {...register('specialization')}
-                            error={!!errors.industry}
-                            helperText={errors.industry?.message as string}
+                            error={!!errors.specialization}
+                            helperText={errors.specialization?.message as string}
                         />
+
+                        <TextField
+                            label="Дополнительная информация"
+                            fullWidth
+                            multiline
+                            minRows={3}
+                            {...register('info')}
+                            error={!!errors.info}
+                            helperText={errors.info?.message as string}
+                        />
+
                         <TextField
                             label="Адрес"
                             fullWidth

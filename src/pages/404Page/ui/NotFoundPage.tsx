@@ -1,8 +1,14 @@
 import { Box, Typography, Button } from '@mui/material';
 import { useNavigate } from 'react-router';
+import { useEffect } from 'react';
 
 const NotFoundPage = () => {
     const navigate = useNavigate();
+
+    useEffect(() => {
+        document.title = 'Страница не найдена | Clients CRM';
+    }, []);
+
     return (
         <Box
             sx={{

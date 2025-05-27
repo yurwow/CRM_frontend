@@ -1,0 +1,23 @@
+<svg width="32" height="32" viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg">
+    <defs>
+        <linearGradient id="bgGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" style="stop-color:#1976d2;stop-opacity:1" />
+            <stop offset="100%" style="stop-color:#1565c0;stop-opacity:1" />
+        </linearGradient>
+        <linearGradient id="iconGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" style="stop-color:#ffffff;stop-opacity:1" />
+            <stop offset="100%" style="stop-color:#e5e7eb;stop-opacity:1" />
+        </linearGradient>
+    </defs>
+
+    <!-- Background -->
+    <rect width="32" height="32" rx="6" fill="url(#bgGradient)"/>
+
+    <!-- Single centered person figure -->
+    <g fill="white">
+        <!-- Head -->
+        <circle cx="16" cy="12" r="3.5"/>
+        <!-- Body -->
+        <path d="M9 24c0-3 3-5 7-5s7 2 7 5v2H9v-2z"/>
+    </g>
+</svg>

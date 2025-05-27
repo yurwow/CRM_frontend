@@ -1,8 +1,13 @@
 import { Box, Typography, Button } from '@mui/material';
 import { useNavigate } from 'react-router';
+import { useEffect } from 'react';
 
 const ForbiddenPage = () => {
     const navigate = useNavigate();
+
+    useEffect(() => {
+        document.title = 'Нет доступа | Clients CRM';
+    }, []);
 
     return (
         <Box

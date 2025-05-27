@@ -1,17 +1,31 @@
 import { useState } from 'react';
-import { Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper, IconButton, Stack, TableSortLabel } from '@mui/material';
+import {
+    Table,
+    TableBody,
+    TableCell,
+    TableContainer,
+    TableHead,
+    TableRow,
+    Paper,
+    IconButton,
+    Stack,
+    TableSortLabel,
+    Typography,
+} from '@mui/material';
 import { Delete } from '@mui/icons-material';
 import { toast } from 'react-toastify';
 
 import { DeleteUserConfirmationModal } from '@/widgets/DeleteUserConfirmationModal';
 import { User } from '@/entities/User/types.ts';
-import { useGetUsersQuery, useDeleteUserMutation } from '@/features/users/model/userApi.ts';
+import { useGetUsersQuery, useDeleteUserMutation, useGetMeQuery } from '@/features/users/model/userApi.ts';
 import { SkeletonUserTable } from '@/widgets/SkeletonUserTable';
 
 export const UsersTable = () => {
     const { data: users = [], isLoading, isError } = useGetUsersQuery();
     const [deleteUser] = useDeleteUserMutation();
+    const {data: me} = useGetMeQuery()
 
+    console.log(users, 'users', me)
     const [open, setOpen] = useState(false);
     const [userIdToDelete, setUserIdToDelete] = useState<number | null>(null);
     const [order, setOrder] = useState<'asc' | 'desc'>('asc');
@@ -84,9 +98,15 @@ export const UsersTable = () => {
                                 <TableCell>{user.email}</TableCell>
                                 <TableCell>{user.role}</TableCell>
                                 <TableCell>
-                                    <IconButton color="error" onClick={() => handleOpenDeleteModal(user.id)}>
-                                        <Delete />
-                                    </IconButton>
+                                    {me?.id !== user.id ? (
+                                        <IconButton color="error" onClick={() => handleOpenDeleteModal(user.id)}>
+                                            <Delete />
+                                        </IconButton>
+                                    ) : (
+                                        <Typography variant="body2" color="textSecondary" sx={{ fontStyle: 'italic' }}>
+                                            Это вы
+                                        </Typography>
+                                    )}
                                 </TableCell>
                             </TableRow>
                         ))}
