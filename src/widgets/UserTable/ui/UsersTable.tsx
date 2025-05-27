@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useMemo, useState } from 'react';
 import {
     Table,
     TableBody,
@@ -25,7 +25,6 @@ export const UsersTable = () => {
     const [deleteUser] = useDeleteUserMutation();
     const {data: me} = useGetMeQuery()
 
-    console.log(users, 'users', me)
     const [open, setOpen] = useState(false);
     const [userIdToDelete, setUserIdToDelete] = useState<number | null>(null);
     const [order, setOrder] = useState<'asc' | 'desc'>('asc');
@@ -37,12 +36,14 @@ export const UsersTable = () => {
         setOrderBy(property);
     };
 
-    const sortedUsers = users.slice().sort((a, b) => {
+    const sortedUsers = useMemo(() => {
         const getValue = (user: User) => user[orderBy as keyof User] ?? '';
-        const aVal = getValue(a).toString();
-        const bVal = getValue(b).toString();
-        return order === 'asc' ? aVal.localeCompare(bVal) : bVal.localeCompare(aVal);
-    });
+        return users.slice().sort((a, b) => {
+            const aVal = getValue(a).toString();
+            const bVal = getValue(b).toString();
+            return order === 'asc' ? aVal.localeCompare(bVal) : bVal.localeCompare(aVal);
+        });
+    }, [order, orderBy, users])
 
     const handleDelete = async () => {
         if (userIdToDelete !== null) {

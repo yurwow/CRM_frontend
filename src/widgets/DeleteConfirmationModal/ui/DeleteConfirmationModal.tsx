@@ -1,4 +1,5 @@
 import { Dialog, DialogActions, DialogContent, DialogTitle, Button } from '@mui/material';
+import { memo } from 'react';
 
 interface DeleteConfirmationModalProps {
     open: boolean;
@@ -7,7 +8,7 @@ interface DeleteConfirmationModalProps {
     text?: string;
 }
 
-export const DeleteConfirmationModal = ({ open, onClose, onConfirm, text = 'клиента' }: DeleteConfirmationModalProps) => {
+export const DeleteConfirmationModal = memo(({ open, onClose, onConfirm, text = 'клиента' }: DeleteConfirmationModalProps) => {
     return (
         <Dialog open={open} onClose={onClose}>
             <DialogTitle>Подтверждение удаления</DialogTitle>
@@ -22,4 +23,4 @@ export const DeleteConfirmationModal = ({ open, onClose, onConfirm, text = 'кл
             </DialogActions>
         </Dialog>
     );
-};
+});

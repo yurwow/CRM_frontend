@@ -1,7 +1,7 @@
 import { CircularProgress, IconButton, List, ListItem, ListItemText, Typography, Paper, Chip, Fade, Box, Divider } from '@mui/material';
 import { useAppDispatch, useAppSelector } from '@/shared/lib/hooks/reduxHooks.ts';
 import { useNavigate, useParams } from 'react-router';
-import { useEffect, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import { getInteractionsById, removeInteractionById } from '@/features/interactions/model/interactionsSlice.ts';
 import { CreateInteractionModal } from '@/widgets/CreateInteractionModal';
 import { DeleteConfirmationModal } from '@/widgets/DeleteConfirmationModal';
@@ -24,6 +24,7 @@ export const InteractionsList = () => {
     useEffect(() => {
         dispatch(getInteractionsById({ id: Number(id) }));
     }, [dispatch, id]);
+
     const [open, setOpen] = useState(false);
     const [editingInteraction, setEditingInteraction] = useState<IInteraction | null>(null);
     const [openDeleteDialog, setOpenDeleteDialog] = useState(false);
@@ -31,17 +32,16 @@ export const InteractionsList = () => {
     const [detailModalOpen, setDetailModalOpen] = useState(false);
     const [selectedInteraction, setSelectedInteraction] = useState<IInteraction | null>(null);
 
-    const handleDelete = () => {
+    const handleDelete = useCallback(() => {
         try {
             dispatch(DeleteClientById({ id: Number(id) }));
             setOpenDeleteDialog(false);
-            toast.success('Клиент успешно удален');
-
             navigate('/');
+            toast.success('Клиент успешно удален');
         } catch {
             toast.error('Ошибка удаления клиента');
         }
-    };
+    }, [dispatch, id, navigate]);
 
     const handleEdit = (interaction: IInteraction) => {
         setEditingInteraction(interaction);

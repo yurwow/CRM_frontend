@@ -1,7 +1,7 @@
 import { Box, Button, Card, CardContent, Divider, Rating, Typography } from '@mui/material';
 import { useDeleteReviewMutation, useGetReviewsByIdQuery } from '@/features/reviews/model/reviewApi.ts';
 import { useParams } from 'react-router';
-import { useState } from 'react';
+import { useCallback, useState } from 'react';
 import { DeleteConfirmationModal } from '@/widgets/DeleteConfirmationModal';
 import { useGetMeQuery } from '@/features/users/model/userApi.ts';
 import { toast } from 'react-toastify';
@@ -15,12 +15,12 @@ export const ReviewList = () => {
     const [deleteReview] = useDeleteReviewMutation();
     const { data: me } = useGetMeQuery();
 
-    const handleOpenDeleteModal = (id: number) => {
+    const handleOpenDeleteModal = useCallback((id: number) => {
         setSelectedReviewId(id);
         setOpenModal(true);
-    };
+    }, [setSelectedReviewId]);
 
-    const handleConfirmDelete = async () => {
+    const handleConfirmDelete = useCallback(async () => {
         if (selectedReviewId !== null) {
             try {
                 await deleteReview(selectedReviewId).unwrap();
@@ -33,7 +33,7 @@ export const ReviewList = () => {
                 setSelectedReviewId(null);
             }
         }
-    };
+    }, [deleteReview, selectedReviewId]);
 
     return (
         <>

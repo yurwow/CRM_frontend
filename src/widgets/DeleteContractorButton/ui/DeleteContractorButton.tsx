@@ -3,7 +3,7 @@ import DeleteIcon from '@mui/icons-material/Delete';
 import { useDeleteContractorMutation } from '@/features/contractors/model/contractorsApi.ts';
 import { useNavigate } from 'react-router';
 import { DeleteConfirmationModal } from '@/widgets/DeleteConfirmationModal';
-import { useState } from 'react';
+import { useCallback, useState } from 'react';
 import { toast } from 'react-toastify';
 
 interface Props {
@@ -16,11 +16,12 @@ export const DeleteContractorButton = ({ contractorId }: Props) => {
 
     const [openModal, setOpenModal] = useState(false);
 
-    const handleDeleteContractor = () => {
+    const handleDeleteContractor = useCallback(() => {
         deleteContractor(contractorId);
         navigate('/contractors');
-        toast.success('Подрядчик успешно удален!');
-    };
+        toast.success('Подрядчик успешно удален!')
+        }, [deleteContractor, contractorId, navigate]
+    );
 
     return (
         <>
