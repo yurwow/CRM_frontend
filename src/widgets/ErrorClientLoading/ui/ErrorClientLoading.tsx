@@ -10,11 +10,20 @@ export const ErrorClientLoading = () => {
     console.log(error);
     return (
         <>
-            <Stack spacing={2} alignItems="center" justifyContent="center" sx={{ width: '100%', padding: 3 }}>
+            <Stack
+                spacing={2}
+                alignItems="center"
+                justifyContent="center"
+                sx={{ width: '100%', padding: 3 }}
+            >
                 <Alert
                     severity="error"
                     action={
-                        <Button color="inherit" size="small" onClick={() => dispatch(getClientsById({ id: Number(id) }))}>
+                        <Button
+                            color="inherit"
+                            size="small"
+                            onClick={() => dispatch(getClientsById({ id: Number(id) }))}
+                        >
                             Повторить
                         </Button>
                     }

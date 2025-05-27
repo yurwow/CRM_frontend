@@ -4,17 +4,17 @@ import { CreateClientModal } from '@/widgets/CreateClientModal';
 import { useEffect } from 'react';
 
 const HomePage = () => {
-  useEffect(() => {
-    document.title = 'Клиенты | Clients CRM';
-  }, []);
+    useEffect(() => {
+        document.title = 'Клиенты | Clients CRM';
+    }, []);
 
-  return (
-    <div>
-      <Header />
-      <ClientList />
-      <CreateClientModal />
-    </div>
-  );
+    return (
+        <div>
+            <Header />
+            <ClientList />
+            <CreateClientModal />
+        </div>
+    );
 };
 
 export default HomePage;

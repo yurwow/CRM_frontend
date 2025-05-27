@@ -19,19 +19,25 @@ const initialState: IState = {
     error: null,
 };
 
-export const login = createAsyncThunk('auth/login', async ({ email, password }: { email: string; password: string }, { rejectWithValue }) => {
-    try {
-        const response = await axios.post(`${API_URL}/auth/login`, { email, password });
-        const { accessToken, refreshToken } = response.data;
+export const login = createAsyncThunk(
+    'auth/login',
+    async ({ email, password }: { email: string; password: string }, { rejectWithValue }) => {
+        try {
+            const response = await axios.post(`${API_URL}/auth/login`, {
+                email,
+                password,
+            });
+            const { accessToken, refreshToken } = response.data;
 
-        localStorage.setItem('accessToken', accessToken);
-        localStorage.setItem('refreshToken', refreshToken);
-        console.log(accessToken, refreshToken);
-        return { accessToken, refreshToken };
-    } catch {
-        return rejectWithValue('Ошибка входа');
-    }
-});
+            localStorage.setItem('accessToken', accessToken);
+            localStorage.setItem('refreshToken', refreshToken);
+            console.log(accessToken, refreshToken);
+            return { accessToken, refreshToken };
+        } catch {
+            return rejectWithValue('Ошибка входа');
+        }
+    },
+);
 
 export const refresh = createAsyncThunk('auth/refresh', async (_, { rejectWithValue }) => {
     try {
@@ -39,7 +45,9 @@ export const refresh = createAsyncThunk('auth/refresh', async (_, { rejectWithVa
         if (!storedRefreshToken) {
             return rejectWithValue('Отсутствует refreshToken');
         }
-        const response = await axios.post(`${API_URL}/auth/refresh`, { refreshToken: storedRefreshToken });
+        const response = await axios.post(`${API_URL}/auth/refresh`, {
+            refreshToken: storedRefreshToken,
+        });
         const { accessToken, refreshToken } = response.data;
 
         localStorage.setItem('accessToken', accessToken);
@@ -47,7 +55,9 @@ export const refresh = createAsyncThunk('auth/refresh', async (_, { rejectWithVa
         console.log('токены обновились');
         return { accessToken, refreshToken };
     } catch (err) {
-        const message = axios.isAxiosError(err) ? err.response?.data?.error || 'Ошибка при обновлении токена' : 'Неизвестная ошибка';
+        const message = axios.isAxiosError(err)
+            ? err.response?.data?.error || 'Ошибка при обновлении токена'
+            : 'Неизвестная ошибка';
         return rejectWithValue(message);
     }
 });

@@ -45,4 +45,9 @@ export const reviewApi = createApi({
     }),
 });
 
-export const { useGetReviewQuery, useGetReviewsByIdQuery, useCreateReviewMutation, useDeleteReviewMutation } = reviewApi;
+export const {
+    useGetReviewQuery,
+    useGetReviewsByIdQuery,
+    useCreateReviewMutation,
+    useDeleteReviewMutation,
+} = reviewApi;

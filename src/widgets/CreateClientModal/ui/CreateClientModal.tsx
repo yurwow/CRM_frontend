@@ -1,7 +1,15 @@
 import { useAppDispatch } from '@/shared/lib/hooks/reduxHooks.ts';
 import { Controller, useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
-import { Button, Dialog, DialogActions, DialogContent, DialogTitle, Stack, TextField } from '@mui/material';
+import {
+    Button,
+    Dialog,
+    DialogActions,
+    DialogContent,
+    DialogTitle,
+    Stack,
+    TextField,
+} from '@mui/material';
 import { addClient } from '@/features/clients/model/clientSlice.ts';
 import { IAddClient } from '@/entities/Client/types.ts';
 import { clientSchema, formatPhoneNumber } from '@/entities/Client/model/ClientSchema.ts';
@@ -71,7 +79,9 @@ export const CreateClientModal = () => {
                                     fullWidth
                                     {...field}
                                     value={field.value || ''}
-                                    onChange={(e) => field.onChange(formatPhoneNumber(e.target.value))}
+                                    onChange={(e) =>
+                                        field.onChange(formatPhoneNumber(e.target.value))
+                                    }
                                     error={!!errors.phone}
                                     helperText={errors.phone?.message}
                                 />

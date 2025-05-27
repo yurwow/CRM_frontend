@@ -16,14 +16,30 @@ export const AverageStatsByClient = ({ stats }: AverageStatsByClientProps) => {
                     </Typography>
                 </Box>
                 <Box sx={{ p: 2, height: 350 }}>
-                    <Box sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100%', flexDirection: 'column' }}>
-                        <Typography variant="h2" color={theme.palette.primary.main} fontWeight="bold">
+                    <Box
+                        sx={{
+                            display: 'flex',
+                            justifyContent: 'center',
+                            alignItems: 'center',
+                            height: '100%',
+                            flexDirection: 'column',
+                        }}
+                    >
+                        <Typography
+                            variant="h2"
+                            color={theme.palette.primary.main}
+                            fontWeight="bold"
+                        >
                             {stats.averageInteractionsPerClient || '0'}
                         </Typography>
                         <Typography variant="body1" color="text.secondary" sx={{ mt: 2 }}>
                             взаимодействий на одного клиента
                         </Typography>
-                        <Typography variant="body2" color={stats.activityGrowth > 0 ? 'success.main' : 'error.main'} sx={{ mt: 1 }}>
+                        <Typography
+                            variant="body2"
+                            color={stats.activityGrowth > 0 ? 'success.main' : 'error.main'}
+                            sx={{ mt: 1 }}
+                        >
                             {stats.activityGrowth > 0 ? '+' : ''}
                             {stats.activityGrowth}% к предыдущему периоду
                         </Typography>

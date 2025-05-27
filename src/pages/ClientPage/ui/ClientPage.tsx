@@ -4,17 +4,17 @@ import { Header } from '@/widgets/Header';
 import { useEffect } from 'react';
 
 const ClientPage = () => {
-  useEffect(() => {
-    document.title = 'Клиент | Clients CRM';
-  }, []);
+    useEffect(() => {
+        document.title = 'Клиент | Clients CRM';
+    }, []);
 
-  return (
-    <div>
-      <Header />
-      <ClientInf />
-      <InteractionsList />
-    </div>
-  );
+    return (
+        <div>
+            <Header />
+            <ClientInf />
+            <InteractionsList />
+        </div>
+    );
 };
 
 export default ClientPage;

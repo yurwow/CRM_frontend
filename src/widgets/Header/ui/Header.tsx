@@ -23,7 +23,9 @@ export const Header = () => {
         color: 'white',
         backgroundColor: isActive(path) ? 'rgb(145,177,236)' : 'rgb(25, 118, 210)',
         '&:hover': {
-            backgroundColor: isActive(path) ? 'rgba(255, 255, 255, 0.3)' : 'rgba(255, 255, 255, 0.1)',
+            backgroundColor: isActive(path)
+                ? 'rgba(255, 255, 255, 0.3)'
+                : 'rgba(255, 255, 255, 0.1)',
         },
     });
 
@@ -38,17 +40,26 @@ export const Header = () => {
                     </Typography>
                     <Box>
                         {role === 'admin' && (
-                            <Button onClick={() => navigate('/admin')} sx={getButtonStyles('/admin')}>
+                            <Button
+                                onClick={() => navigate('/admin')}
+                                sx={getButtonStyles('/admin')}
+                            >
                                 Пользователи
                             </Button>
                         )}
                         <Button onClick={() => navigate('/')} sx={getButtonStyles('/')}>
                             Клиенты
                         </Button>
-                        <Button onClick={() => navigate('/statistics')} sx={getButtonStyles('/statistics')}>
+                        <Button
+                            onClick={() => navigate('/statistics')}
+                            sx={getButtonStyles('/statistics')}
+                        >
                             Статистика
                         </Button>
-                        <Button onClick={() => navigate('/contractors')} sx={getButtonStyles('/contractors')}>
+                        <Button
+                            onClick={() => navigate('/contractors')}
+                            sx={getButtonStyles('/contractors')}
+                        >
                             Подрядчики
                         </Button>
                     </Box>

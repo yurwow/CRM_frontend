@@ -9,7 +9,12 @@ export const ErrorLoading = () => {
     console.log(error);
     return (
         <>
-            <Stack spacing={2} alignItems="center" justifyContent="center" sx={{ width: '100%', padding: 3 }}>
+            <Stack
+                spacing={2}
+                alignItems="center"
+                justifyContent="center"
+                sx={{ width: '100%', padding: 3 }}
+            >
                 <Alert
                     severity="error"
                     action={

@@ -1,5 +1,14 @@
 import { alpha, Box, Grid, Paper, Typography, useTheme } from '@mui/material';
-import { Area, AreaChart, CartesianGrid, Legend, ResponsiveContainer, Tooltip, XAxis, YAxis } from 'recharts';
+import {
+    Area,
+    AreaChart,
+    CartesianGrid,
+    Legend,
+    ResponsiveContainer,
+    Tooltip,
+    XAxis,
+    YAxis,
+} from 'recharts';
 import { COLORS } from '@/pages/StatisticsPage/const/colors.ts';
 import { IStats } from '@/entities/Statistics/types.ts';
 import { mergeMonthlyData } from '@/widgets/StatsTable/help/mergeMonthlyData.ts';
@@ -22,7 +31,10 @@ export const StatsTable = ({ stats }: StatsTableProps) => {
                     {stats.clientsByMonth?.length > 0 || stats.interactionsByMonth?.length > 0 ? (
                         <ResponsiveContainer width="100%" height="100%">
                             <AreaChart
-                                data={mergeMonthlyData(stats.clientsByMonth, stats.interactionsByMonth)}
+                                data={mergeMonthlyData(
+                                    stats.clientsByMonth,
+                                    stats.interactionsByMonth,
+                                )}
                                 margin={{ top: 10, right: 30, left: 0, bottom: 0 }}
                             >
                                 <CartesianGrid strokeDasharray="3 3" />
@@ -30,7 +42,9 @@ export const StatsTable = ({ stats }: StatsTableProps) => {
                                     dataKey="month"
                                     tickFormatter={(date) => {
                                         const d = new Date(date);
-                                        return new Intl.DateTimeFormat('ru-RU', { month: 'short' }).format(d);
+                                        return new Intl.DateTimeFormat('ru-RU', {
+                                            month: 'short',
+                                        }).format(d);
                                     }}
                                 />
                                 <YAxis />
@@ -40,13 +54,23 @@ export const StatsTable = ({ stats }: StatsTableProps) => {
                                         boxShadow: '0 4px 12px rgba(0,0,0,0.15)',
                                         border: 'none',
                                     }}
-                                    formatter={(value, name) => [value, name === 'clients' ? 'Клиенты' : 'Взаимодействия']}
+                                    formatter={(value, name) => [
+                                        value,
+                                        name === 'clients' ? 'Клиенты' : 'Взаимодействия',
+                                    ]}
                                     labelFormatter={(label) => {
                                         const d = new Date(label);
-                                        return new Intl.DateTimeFormat('ru-RU', { month: 'long', year: 'numeric' }).format(d);
+                                        return new Intl.DateTimeFormat('ru-RU', {
+                                            month: 'long',
+                                            year: 'numeric',
+                                        }).format(d);
                                     }}
                                 />
-                                <Legend formatter={(value) => (value === 'clients' ? 'Новые клиенты' : 'Взаимодействия')} />
+                                <Legend
+                                    formatter={(value) =>
+                                        value === 'clients' ? 'Новые клиенты' : 'Взаимодействия'
+                                    }
+                                />
                                 <Area
                                     type="monotone"
                                     dataKey="clients"
@@ -66,7 +90,14 @@ export const StatsTable = ({ stats }: StatsTableProps) => {
                             </AreaChart>
                         </ResponsiveContainer>
                     ) : (
-                        <Box sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100%' }}>
+                        <Box
+                            sx={{
+                                display: 'flex',
+                                justifyContent: 'center',
+                                alignItems: 'center',
+                                height: '100%',
+                            }}
+                        >
                             <Typography variant="body2" color="text.secondary">
                                 Нет данных для отображения
                             </Typography>

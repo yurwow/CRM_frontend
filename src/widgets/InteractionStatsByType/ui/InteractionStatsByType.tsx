@@ -1,5 +1,14 @@
 import { alpha, Box, Grid, Paper, Typography, useTheme } from '@mui/material';
-import { Bar, BarChart, CartesianGrid, Legend, ResponsiveContainer, Tooltip, XAxis, YAxis } from 'recharts';
+import {
+    Bar,
+    BarChart,
+    CartesianGrid,
+    Legend,
+    ResponsiveContainer,
+    Tooltip,
+    XAxis,
+    YAxis,
+} from 'recharts';
 import { COLORS } from '@/pages/StatisticsPage/const/colors.ts';
 import { IStats } from '@/entities/Statistics/types.ts';
 
@@ -33,11 +42,24 @@ export const InteractionStatsByType = ({ stats }: InteractionStatsByTypeProps) =
                                     }}
                                 />
                                 <Legend />
-                                <Bar dataKey="count" name="Количество" fill={COLORS[0]} radius={[4, 4, 0, 0]} animationDuration={1500} />
+                                <Bar
+                                    dataKey="count"
+                                    name="Количество"
+                                    fill={COLORS[0]}
+                                    radius={[4, 4, 0, 0]}
+                                    animationDuration={1500}
+                                />
                             </BarChart>
                         </ResponsiveContainer>
                     ) : (
-                        <Box sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100%' }}>
+                        <Box
+                            sx={{
+                                display: 'flex',
+                                justifyContent: 'center',
+                                alignItems: 'center',
+                                height: '100%',
+                            }}
+                        >
                             <Typography variant="body2" color="text.secondary">
                                 Нет данных для отображения
                             </Typography>

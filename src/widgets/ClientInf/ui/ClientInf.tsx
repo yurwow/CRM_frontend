@@ -1,4 +1,13 @@
-import { Stack, Card, CardContent, Divider, Box, TextField, Button, Typography } from '@mui/material';
+import {
+    Stack,
+    Card,
+    CardContent,
+    Divider,
+    Box,
+    TextField,
+    Button,
+    Typography,
+} from '@mui/material';
 import { useParams } from 'react-router';
 import { useAppDispatch, useAppSelector } from '@/shared/lib/hooks/reduxHooks.ts';
 import { ChangeEvent, useEffect, useState } from 'react';
@@ -44,7 +53,12 @@ export const ClientInf = () => {
     const handleSave = () => {
         try {
             if (currentClient) {
-                dispatch(updateClient({ id: Number(id), clientData: clientData as IAddClient })).unwrap();
+                dispatch(
+                    updateClient({
+                        id: Number(id),
+                        clientData: clientData as IAddClient,
+                    }),
+                ).unwrap();
                 toast.success('Клиент успешно обновлён');
                 setIsEditing(false);
             }
@@ -81,7 +95,12 @@ export const ClientInf = () => {
                 <CardContent>
                     {isEditing ? (
                         <>
-                            <Stack direction="row" alignItems="center" spacing={2} sx={{ p: 1, borderRadius: 2, bgcolor: '#f9f9f9' }}>
+                            <Stack
+                                direction="row"
+                                alignItems="center"
+                                spacing={2}
+                                sx={{ p: 1, borderRadius: 2, bgcolor: '#f9f9f9' }}
+                            >
                                 <Box
                                     sx={{
                                         color: 'primary.main',
@@ -106,14 +125,25 @@ export const ClientInf = () => {
                             </Stack>
                         </>
                     ) : (
-                        <Typography variant="h4" fontWeight="bold" gutterBottom sx={{ textAlign: 'center' }}>
+                        <Typography
+                            variant="h4"
+                            fontWeight="bold"
+                            gutterBottom
+                            sx={{ textAlign: 'center' }}
+                        >
                             {currentClient.name}
                         </Typography>
                     )}
                     {!isEditing && <Divider sx={{ mb: 3 }} />}
                     <Stack spacing={2}>
                         {clientFields.map(({ icon, label, name, color }, index) => (
-                            <Stack key={index} direction="row" alignItems="center" spacing={2} sx={{ p: 1, borderRadius: 2, bgcolor: '#f9f9f9' }}>
+                            <Stack
+                                key={index}
+                                direction="row"
+                                alignItems="center"
+                                spacing={2}
+                                sx={{ p: 1, borderRadius: 2, bgcolor: '#f9f9f9' }}
+                            >
                                 <Box
                                     sx={{
                                         color,
@@ -154,7 +184,13 @@ export const ClientInf = () => {
                             </Button>
                         </Stack>
                     ) : (
-                        <Button variant="outlined" color="primary" fullWidth sx={{ mt: 3 }} onClick={() => setIsEditing(true)}>
+                        <Button
+                            variant="outlined"
+                            color="primary"
+                            fullWidth
+                            sx={{ mt: 3 }}
+                            onClick={() => setIsEditing(true)}
+                        >
                             Редактировать информацию
                         </Button>
                     )}

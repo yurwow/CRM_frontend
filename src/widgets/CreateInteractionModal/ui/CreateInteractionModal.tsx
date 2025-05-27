@@ -2,8 +2,20 @@ import { useAppDispatch } from '@/shared/lib/hooks/reduxHooks.ts';
 import { z } from 'zod';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
-import { Button, Dialog, DialogActions, DialogContent, DialogTitle, MenuItem, Stack, TextField } from '@mui/material';
-import { addInteractionById, updateInteractionById } from '@/features/interactions/model/interactionsSlice.ts';
+import {
+    Button,
+    Dialog,
+    DialogActions,
+    DialogContent,
+    DialogTitle,
+    MenuItem,
+    Stack,
+    TextField,
+} from '@mui/material';
+import {
+    addInteractionById,
+    updateInteractionById,
+} from '@/features/interactions/model/interactionsSlice.ts';
 import { useEffect } from 'react';
 import { toast } from 'react-toastify';
 
@@ -17,10 +29,20 @@ interface IProps {
     open: boolean;
     onClose: () => void;
     client_id: number;
-    editingInteraction?: { id?: number; type: string; notes?: string; date: string } | null;
+    editingInteraction?: {
+        id?: number;
+        type: string;
+        notes?: string;
+        date: string;
+    } | null;
 }
 
-export const CreateInteractionModal = ({ open, onClose, client_id, editingInteraction }: IProps) => {
+export const CreateInteractionModal = ({
+    open,
+    onClose,
+    client_id,
+    editingInteraction,
+}: IProps) => {
     const dispatch = useAppDispatch();
     const {
         register,
@@ -79,7 +101,9 @@ export const CreateInteractionModal = ({ open, onClose, client_id, editingIntera
 
     return (
         <Dialog open={open} onClose={onClose} fullWidth maxWidth="sm">
-            <DialogTitle>{editingInteraction ? 'Редактировать взаимодействие' : 'Добавить взаимодействие'}</DialogTitle>
+            <DialogTitle>
+                {editingInteraction ? 'Редактировать взаимодействие' : 'Добавить взаимодействие'}
+            </DialogTitle>
             <DialogContent>
                 <Stack spacing={2} sx={{ mt: 2 }}>
                     <TextField

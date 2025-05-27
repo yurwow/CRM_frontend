@@ -44,7 +44,11 @@ export const ClientList = () => {
 
     const filteredClients = useMemo<IClient[]>(() => {
         return clients.filter((client) =>
-            Object.values(client).some((value) => typeof value === 'string' && value.toLowerCase().includes(searchTerm.toLowerCase())),
+            Object.values(client).some(
+                (value) =>
+                    typeof value === 'string' &&
+                    value.toLowerCase().includes(searchTerm.toLowerCase()),
+            ),
         );
     }, [clients, searchTerm]);
 
@@ -69,7 +73,11 @@ export const ClientList = () => {
     if (status === 'failed') return <ErrorLoading />;
 
     return (
-        <Stack spacing={3} alignItems="center" sx={{ width: '100%', maxWidth: 1200, margin: '0 auto', padding: 3 }}>
+        <Stack
+            spacing={3}
+            alignItems="center"
+            sx={{ width: '100%', maxWidth: 1200, margin: '0 auto', padding: 3 }}
+        >
             <TextField
                 label="Поиск"
                 variant="outlined"
@@ -81,7 +89,10 @@ export const ClientList = () => {
                 }}
             />
 
-            <TableContainer component={Paper} sx={{ boxShadow: 3, borderRadius: 2, width: '100%', overflowX: 'auto' }}>
+            <TableContainer
+                component={Paper}
+                sx={{ boxShadow: 3, borderRadius: 2, width: '100%', overflowX: 'auto' }}
+            >
                 <Table>
                     <TableHead>
                         <TableRow>
@@ -117,7 +128,10 @@ export const ClientList = () => {
                                     <TableCell>{client.address}</TableCell>
                                     <TableCell>{client.industry}</TableCell>
                                     <TableCell>
-                                        <IconButton color="primary" onClick={() => navigate(`/clients/${client.id}`)}>
+                                        <IconButton
+                                            color="primary"
+                                            onClick={() => navigate(`/clients/${client.id}`)}
+                                        >
                                             <Visibility />
                                         </IconButton>
                                     </TableCell>

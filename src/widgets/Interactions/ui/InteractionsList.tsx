@@ -1,8 +1,23 @@
-import { CircularProgress, IconButton, List, ListItem, ListItemText, Typography, Paper, Chip, Fade, Box, Divider } from '@mui/material';
+import {
+    CircularProgress,
+    IconButton,
+    List,
+    ListItem,
+    ListItemText,
+    Typography,
+    Paper,
+    Chip,
+    Fade,
+    Box,
+    Divider,
+} from '@mui/material';
 import { useAppDispatch, useAppSelector } from '@/shared/lib/hooks/reduxHooks.ts';
 import { useNavigate, useParams } from 'react-router';
 import { useCallback, useEffect, useState } from 'react';
-import { getInteractionsById, removeInteractionById } from '@/features/interactions/model/interactionsSlice.ts';
+import {
+    getInteractionsById,
+    removeInteractionById,
+} from '@/features/interactions/model/interactionsSlice.ts';
 import { CreateInteractionModal } from '@/widgets/CreateInteractionModal';
 import { DeleteConfirmationModal } from '@/widgets/DeleteConfirmationModal';
 import { InteractionDetailModal } from '@/widgets/InteractionDetailModal';
@@ -19,7 +34,11 @@ export const InteractionsList = () => {
     const { id } = useParams();
     const dispatch = useAppDispatch();
     const navigate = useNavigate();
-    const { interactions, status: interactionsStatus, error: interactionsError } = useAppSelector((state) => state.interactions);
+    const {
+        interactions,
+        status: interactionsStatus,
+        error: interactionsError,
+    } = useAppSelector((state) => state.interactions);
 
     useEffect(() => {
         dispatch(getInteractionsById({ id: Number(id) }));
@@ -69,7 +88,16 @@ export const InteractionsList = () => {
 
     return (
         <div>
-            <Typography variant="h4" sx={{ mb: 3, mt: 3, textAlign: 'center', fontWeight: 'bold', color: '#333' }}>
+            <Typography
+                variant="h4"
+                sx={{
+                    mb: 3,
+                    mt: 3,
+                    textAlign: 'center',
+                    fontWeight: 'bold',
+                    color: '#333',
+                }}
+            >
                 История взаимодействий
             </Typography>
             <Box
@@ -83,13 +111,26 @@ export const InteractionsList = () => {
                     mb: 4,
                 }}
             >
-                {interactionsStatus === 'loading' && <CircularProgress sx={{ display: 'block', margin: '20px auto' }} />}
+                {interactionsStatus === 'loading' && (
+                    <CircularProgress sx={{ display: 'block', margin: '20px auto' }} />
+                )}
                 {interactionsError && <Typography color="error">{interactionsError}</Typography>}
 
                 <Fade in={true} timeout={600}>
-                    <Paper elevation={6} sx={{ p: 2, borderRadius: 4, bgcolor: '#fff', boxShadow: '0px 4px 12px rgba(0, 0, 0, 0.15)' }}>
+                    <Paper
+                        elevation={6}
+                        sx={{
+                            p: 2,
+                            borderRadius: 4,
+                            bgcolor: '#fff',
+                            boxShadow: '0px 4px 12px rgba(0, 0, 0, 0.15)',
+                        }}
+                    >
                         {interactions.length === 0 ? (
-                            <Typography textAlign="center" sx={{ fontStyle: 'italic', color: 'gray' }}>
+                            <Typography
+                                textAlign="center"
+                                sx={{ fontStyle: 'italic', color: 'gray' }}
+                            >
                                 Нет взаимодействий
                             </Typography>
                         ) : (
@@ -157,22 +198,35 @@ export const InteractionsList = () => {
                                                                 WebkitBoxOrient: 'vertical',
                                                             }}
                                                         >
-                                                            {interaction.notes ? `📝 ${interaction.notes}` : 'Без заметок'}
+                                                            {interaction.notes
+                                                                ? `📝 ${interaction.notes}`
+                                                                : 'Без заметок'}
                                                         </Box>
                                                     </Typography>
                                                 }
                                                 secondary={
                                                     <Typography component="span">
-                                                        <Box display="flex" alignItems="center" color="#777">
-                                                            <EventIcon sx={{ fontSize: 16, mr: 0.5 }} />
-                                                            {format(new Date(interaction.date), 'dd.MM.yyyy')}
+                                                        <Box
+                                                            display="flex"
+                                                            alignItems="center"
+                                                            color="#777"
+                                                        >
+                                                            <EventIcon
+                                                                sx={{ fontSize: 16, mr: 0.5 }}
+                                                            />
+                                                            {format(
+                                                                new Date(interaction.date),
+                                                                'dd.MM.yyyy',
+                                                            )}
                                                         </Box>
                                                     </Typography>
                                                 }
                                             />
                                         </ListItem>
 
-                                        {index < interactions.length - 1 && <Divider variant="middle" sx={{ my: 1 }} />}
+                                        {index < interactions.length - 1 && (
+                                            <Divider variant="middle" sx={{ my: 1 }} />
+                                        )}
                                     </Box>
                                 ))}
                             </List>
@@ -189,7 +243,11 @@ export const InteractionsList = () => {
                     client_id={Number(id)}
                     editingInteraction={editingInteraction}
                 />
-                <DeleteConfirmationModal open={openDeleteDialog} onClose={() => setOpenDeleteDialog(false)} onConfirm={handleDelete} />
+                <DeleteConfirmationModal
+                    open={openDeleteDialog}
+                    onClose={() => setOpenDeleteDialog(false)}
+                    onConfirm={handleDelete}
+                />
                 <InteractionDetailModal
                     open={detailModalOpen}
                     onClose={() => {
@@ -199,7 +257,10 @@ export const InteractionsList = () => {
                     interaction={selectedInteraction}
                 />
             </Box>
-            <FabButton onAddClick={() => setOpen(true)} onDeleteClick={() => setOpenDeleteDialog(true)} />
+            <FabButton
+                onAddClick={() => setOpen(true)}
+                onDeleteClick={() => setOpenDeleteDialog(true)}
+            />
         </div>
     );
 };

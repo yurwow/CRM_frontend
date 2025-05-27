@@ -44,7 +44,11 @@ export const TableContractors = () => {
         return (
             data &&
             data.filter((contractor: Contractor) =>
-                Object.values(contractor).some((value) => typeof value === 'string' && value.toLowerCase().includes(searchTerm.toLowerCase())),
+                Object.values(contractor).some(
+                    (value) =>
+                        typeof value === 'string' &&
+                        value.toLowerCase().includes(searchTerm.toLowerCase()),
+                ),
             )
         );
     }, [data, searchTerm]);
@@ -74,7 +78,11 @@ export const TableContractors = () => {
     if (isError) return <Typography color="error">Ошибка загрузки данных</Typography>;
 
     return (
-        <Stack spacing={3} alignItems="center" sx={{ width: '100%', maxWidth: 1200, margin: '0 auto', padding: 3 }}>
+        <Stack
+            spacing={3}
+            alignItems="center"
+            sx={{ width: '100%', maxWidth: 1200, margin: '0 auto', padding: 3 }}
+        >
             <TextField
                 label="Поиск"
                 variant="outlined"
@@ -86,7 +94,10 @@ export const TableContractors = () => {
                 }}
             />
 
-            <TableContainer component={Paper} sx={{ boxShadow: 3, borderRadius: 2, width: '100%', overflowX: 'auto' }}>
+            <TableContainer
+                component={Paper}
+                sx={{ boxShadow: 3, borderRadius: 2, width: '100%', overflowX: 'auto' }}
+            >
                 <Table>
                     <TableHead>
                         <TableRow>
@@ -135,7 +146,13 @@ export const TableContractors = () => {
                                                 <span>
                                                     <Rating
                                                         name="read-only"
-                                                        value={contractor.average_rating ? parseFloat(contractor.average_rating) : 0}
+                                                        value={
+                                                            contractor.average_rating
+                                                                ? parseFloat(
+                                                                      contractor.average_rating,
+                                                                  )
+                                                                : 0
+                                                        }
                                                         precision={0.1}
                                                         readOnly
                                                     />
@@ -145,7 +162,12 @@ export const TableContractors = () => {
                                     </TableCell>
 
                                     <TableCell>
-                                        <IconButton color="primary" onClick={() => navigate(`/contractors/${contractor.id}`)}>
+                                        <IconButton
+                                            color="primary"
+                                            onClick={() =>
+                                                navigate(`/contractors/${contractor.id}`)
+                                            }
+                                        >
                                             <Visibility />
                                         </IconButton>
                                     </TableCell>

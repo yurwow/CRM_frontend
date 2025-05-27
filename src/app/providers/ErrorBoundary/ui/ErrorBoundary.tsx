@@ -20,7 +20,7 @@ export class ErrorBoundary extends Component<ErrorBoundaryProps, ErrorBoundarySt
     }
 
     componentDidCatch(error: Error, errorInfo: ErrorInfo) {
-        // eslint-disable-next-line  no-console
+         
         console.info(error, errorInfo);
     }
 
@@ -31,7 +31,11 @@ export class ErrorBoundary extends Component<ErrorBoundaryProps, ErrorBoundarySt
         if (hasError) {
             return (
                 <Suspense fallback="">
-                    <Stack sx={{ width: '100wh', height: '100vh' }} justifyContent="center" alignItems="center">
+                    <Stack
+                        sx={{ width: '100wh', height: '100vh' }}
+                        justifyContent="center"
+                        alignItems="center"
+                    >
                         <Typography variant="h2">Что-то пошло не так :(</Typography>
                     </Stack>
                 </Suspense>

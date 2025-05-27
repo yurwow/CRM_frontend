@@ -1,5 +1,13 @@
 import { Controller, useForm } from 'react-hook-form';
-import { Button, Dialog, DialogActions, DialogContent, DialogTitle, Stack, TextField } from '@mui/material';
+import {
+    Button,
+    Dialog,
+    DialogActions,
+    DialogContent,
+    DialogTitle,
+    Stack,
+    TextField,
+} from '@mui/material';
 import { formatPhoneNumber } from '@/entities/Client/model/ClientSchema.ts';
 import { toast } from 'react-toastify';
 import { useEffect, useState } from 'react';
@@ -67,7 +75,9 @@ export const CreateContractorModal = () => {
                                     fullWidth
                                     {...field}
                                     value={field.value || ''}
-                                    onChange={(e) => field.onChange(formatPhoneNumber(e.target.value))}
+                                    onChange={(e) =>
+                                        field.onChange(formatPhoneNumber(e.target.value))
+                                    }
                                     error={!!errors.phone}
                                 />
                             )}

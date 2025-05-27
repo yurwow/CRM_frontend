@@ -57,7 +57,13 @@ const LoginForm = () => {
                         error={!!errors.password}
                         helperText={errors.password?.message}
                     />
-                    <Button type="submit" variant="contained" color="primary" fullWidth sx={{ mt: 2 }}>
+                    <Button
+                        type="submit"
+                        variant="contained"
+                        color="primary"
+                        fullWidth
+                        sx={{ mt: 2 }}
+                    >
                         {status === 'loading' ? 'Загрузка...' : 'Войти'}
                     </Button>
                     {error && (

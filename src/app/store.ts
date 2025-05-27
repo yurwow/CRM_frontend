@@ -19,7 +19,12 @@ export const store = configureStore({
         [contractorsApi.reducerPath]: contractorsApi.reducer,
         [reviewApi.reducerPath]: reviewApi.reducer,
     },
-    middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(userApi.middleware, contractorsApi.middleware, reviewApi.middleware),
+    middleware: (getDefaultMiddleware) =>
+        getDefaultMiddleware().concat(
+            userApi.middleware,
+            contractorsApi.middleware,
+            reviewApi.middleware,
+        ),
 });
 
 setupInterceptors(store);

@@ -6,7 +6,11 @@ interface DeleteUserConfirmationModalProps {
     onConfirm: () => void;
 }
 
-export const DeleteUserConfirmationModal = ({ open, onClose, onConfirm }: DeleteUserConfirmationModalProps) => {
+export const DeleteUserConfirmationModal = ({
+    open,
+    onClose,
+    onConfirm,
+}: DeleteUserConfirmationModalProps) => {
     return (
         <Dialog open={open} onClose={onClose}>
             <DialogTitle>Подтверждение удаления</DialogTitle>

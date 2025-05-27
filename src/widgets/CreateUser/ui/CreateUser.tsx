@@ -1,5 +1,13 @@
 import { useState } from 'react';
-import { Button, Grid, MenuItem, TextField, Dialog, DialogContent, DialogTitle } from '@mui/material';
+import {
+    Button,
+    Grid,
+    MenuItem,
+    TextField,
+    Dialog,
+    DialogContent,
+    DialogTitle,
+} from '@mui/material';
 import { useForm } from 'react-hook-form';
 import { toast } from 'react-toastify';
 import { AddClientButton } from '@/widgets/AddClientButton';
@@ -68,7 +76,9 @@ export const CreateUser = () => {
                             <Grid item sx={{ mt: 1 }} xs={12}>
                                 <TextField
                                     label="ФИО"
-                                    {...register('full_name', { required: 'Поле обязательно для заполнения' })}
+                                    {...register('full_name', {
+                                        required: 'Поле обязательно для заполнения',
+                                    })}
                                     fullWidth
                                     error={!!errors.full_name}
                                     helperText={errors.full_name?.message}
@@ -96,7 +106,9 @@ export const CreateUser = () => {
                                 <TextField
                                     label="Пароль"
                                     type="password"
-                                    {...register('password', { required: 'Поле обязательно для заполнения' })}
+                                    {...register('password', {
+                                        required: 'Поле обязательно для заполнения',
+                                    })}
                                     fullWidth
                                     error={!!errors.password}
                                     helperText={errors.password?.message}
@@ -109,7 +121,8 @@ export const CreateUser = () => {
                                     type="password"
                                     {...register('confirmPassword', {
                                         required: 'Поле обязательно для заполнения',
-                                        validate: (value) => value === password || 'Пароли не совпадают',
+                                        validate: (value) =>
+                                            value === password || 'Пароли не совпадают',
                                     })}
                                     fullWidth
                                     error={!!errors.confirmPassword}
@@ -120,7 +133,9 @@ export const CreateUser = () => {
                             <Grid item xs={12}>
                                 <TextField
                                     label="Роль"
-                                    {...register('role', { required: 'Поле обязательно для заполнения' })}
+                                    {...register('role', {
+                                        required: 'Поле обязательно для заполнения',
+                                    })}
                                     select
                                     fullWidth
                                     error={!!errors.role}
@@ -135,7 +150,13 @@ export const CreateUser = () => {
                             </Grid>
 
                             <Grid item xs={12}>
-                                <Button variant="contained" color="primary" type="submit" fullWidth disabled={loading}>
+                                <Button
+                                    variant="contained"
+                                    color="primary"
+                                    type="submit"
+                                    fullWidth
+                                    disabled={loading}
+                                >
                                     {loading ? 'Создание...' : 'Создать пользователя'}
                                 </Button>
                             </Grid>

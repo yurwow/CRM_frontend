@@ -1,4 +1,14 @@
-import { Dialog, DialogTitle, DialogContent, DialogActions, Button, Typography, Box, Chip, Divider } from '@mui/material';
+import {
+    Dialog,
+    DialogTitle,
+    DialogContent,
+    DialogActions,
+    Button,
+    Typography,
+    Box,
+    Chip,
+    Divider,
+} from '@mui/material';
 import { format } from 'date-fns';
 import { IInteraction } from '@/entities/Interactions/types.ts';
 import EventIcon from '@mui/icons-material/Event';
@@ -9,7 +19,11 @@ interface InteractionDetailModalProps {
     interaction: IInteraction | null;
 }
 
-export const InteractionDetailModal = ({ open, onClose, interaction }: InteractionDetailModalProps) => {
+export const InteractionDetailModal = ({
+    open,
+    onClose,
+    interaction,
+}: InteractionDetailModalProps) => {
     if (!interaction) return null;
 
     return (
@@ -54,7 +68,9 @@ export const InteractionDetailModal = ({ open, onClose, interaction }: Interacti
                         </Typography>
                         <Box display="flex" alignItems="center">
                             <EventIcon sx={{ mr: 1, color: '#666' }} />
-                            <Typography>{format(new Date(interaction.createdAt), 'dd.MM.yyyy')}</Typography>
+                            <Typography>
+                                {format(new Date(interaction.createdAt), 'dd.MM.yyyy')}
+                            </Typography>
                         </Box>
                     </Box>
                 )}
@@ -66,7 +82,9 @@ export const InteractionDetailModal = ({ open, onClose, interaction }: Interacti
                         </Typography>
                         <Box display="flex" alignItems="center">
                             <EventIcon sx={{ mr: 1, color: '#666' }} />
-                            <Typography>{format(new Date(interaction.updatedAt), 'dd.MM.yyyy')}</Typography>
+                            <Typography>
+                                {format(new Date(interaction.updatedAt), 'dd.MM.yyyy')}
+                            </Typography>
                         </Box>
                     </Box>
                 )}

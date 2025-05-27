@@ -4,17 +4,17 @@ import { UsersTable } from '@/widgets/UserTable';
 import { useEffect } from 'react';
 
 const AdminPage = () => {
-  useEffect(() => {
-    document.title = 'Пользователи | Clients CRM';
-  }, []);
+    useEffect(() => {
+        document.title = 'Пользователи | Clients CRM';
+    }, []);
 
-  return (
-    <div>
-      <Header />
-      <CreateUser />
-      <UsersTable />
-    </div>
-  );
+    return (
+        <div>
+            <Header />
+            <CreateUser />
+            <UsersTable />
+        </div>
+    );
 };
 
 export default AdminPage;

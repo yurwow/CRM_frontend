@@ -1,10 +1,32 @@
-import { Paper, Skeleton, Stack, Table, TableBody, TableCell, TableContainer, TableHead, TableRow } from '@mui/material';
+import {
+    Paper,
+    Skeleton,
+    Stack,
+    Table,
+    TableBody,
+    TableCell,
+    TableContainer,
+    TableHead,
+    TableRow,
+} from '@mui/material';
 
 export const SkeletonUserTable = () => {
     return (
         <>
-            <Stack spacing={3} alignItems="center" sx={{ width: '100%', maxWidth: 1200, margin: '0 auto', padding: 3 }}>
-                <TableContainer component={Paper} sx={{ boxShadow: 3, borderRadius: 2, width: '100%', overflowX: 'auto' }}>
+            <Stack
+                spacing={3}
+                alignItems="center"
+                sx={{ width: '100%', maxWidth: 1200, margin: '0 auto', padding: 3 }}
+            >
+                <TableContainer
+                    component={Paper}
+                    sx={{
+                        boxShadow: 3,
+                        borderRadius: 2,
+                        width: '100%',
+                        overflowX: 'auto',
+                    }}
+                >
                     <Table>
                         <TableHead>
                             <TableRow>

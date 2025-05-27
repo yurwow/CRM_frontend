@@ -1,7 +1,12 @@
 import { IStatsInteractionMonth } from '@/entities/Statistics/types.ts';
 
-export const mergeMonthlyData = (clientsData: IStatsInteractionMonth[] = [], interactionsData: IStatsInteractionMonth[] = []) => {
-    const mergedData: { [key: string]: { month: string; clients: number; interactions: number } } = {};
+export const mergeMonthlyData = (
+    clientsData: IStatsInteractionMonth[] = [],
+    interactionsData: IStatsInteractionMonth[] = [],
+) => {
+    const mergedData: {
+        [key: string]: { month: string; clients: number; interactions: number };
+    } = {};
 
     clientsData.forEach((item) => {
         const month = item.month;

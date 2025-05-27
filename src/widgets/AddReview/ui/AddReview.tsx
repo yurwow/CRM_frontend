@@ -32,8 +32,18 @@ export const AddReview = ({ contractorId }: Props) => {
                 Добавить отзыв
             </Typography>
             <Box sx={{ display: 'flex', flexDirection: 'column', gap: 2, mb: 2 }}>
-                <TextField fullWidth label="Ваш отзыв" multiline value={newReviewText} onChange={(e) => setNewReviewText(e.target.value)} />
-                <Rating name="new-rating" value={newRating} onChange={(_, newValue) => setNewRating(newValue as typeof newRating)} />
+                <TextField
+                    fullWidth
+                    label="Ваш отзыв"
+                    multiline
+                    value={newReviewText}
+                    onChange={(e) => setNewReviewText(e.target.value)}
+                />
+                <Rating
+                    name="new-rating"
+                    value={newRating}
+                    onChange={(_, newValue) => setNewRating(newValue as typeof newRating)}
+                />
                 <Button variant="contained" onClick={handleAddReview}>
                     Добавить отзыв
                 </Button>
