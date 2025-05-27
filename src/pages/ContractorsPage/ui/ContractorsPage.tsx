@@ -3,20 +3,18 @@ import { TableContractors } from '@/widgets/TableContractors';
 import { CreateContractorModal } from '@/widgets/CreateContractorModal';
 import { useEffect } from 'react';
 
-
 const ContractorsPage = () => {
+  useEffect(() => {
+    document.title = 'Подрядчики | Clients CRM';
+  }, []);
 
-    useEffect(() => {
-        document.title = 'Подрядчики | Clients CRM';
-    }, []);
-
-    return (
-        <div>
-            <Header />
-            <TableContractors />
-            <CreateContractorModal />
-        </div>
-    );
+  return (
+    <div>
+      <Header />
+      <TableContractors />
+      <CreateContractorModal />
+    </div>
+  );
 };
 
 export default ContractorsPage;
